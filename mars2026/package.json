@@ -3,6 +3,7 @@
   "scripts": {
     "dev": "next dev",
     "build": "next build",
+    "import:posters": "node scripts/import-posters.mjs data/posters.json",
     "start": "next start",
     "lint": "eslint ."
   },
