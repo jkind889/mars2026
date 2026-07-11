@@ -9,20 +9,24 @@ function formatCurrency(totalCents: number, currency = "usd") {
   }).format(totalCents / 100);
 }
 
-function formatAddress(address: unknown) {
-  if (!address) {
-    return "No shipping address";
-  }
+function formatAddress(order: {
+  shipping_address_line1: string | null;
+  shipping_address_line2: string | null;
+  shipping_city: string | null;
+  shipping_state: string | null;
+  shipping_postal_code: string | null;
+  shipping_country: string | null;
+}) {
+  const lines = [
+    order.shipping_address_line1,
+    order.shipping_address_line2,
+    [order.shipping_city, order.shipping_state, order.shipping_postal_code]
+      .filter(Boolean)
+      .join(", "),
+    order.shipping_country,
+  ].filter(Boolean);
 
-  if (typeof address === "string") {
-    return address;
-  }
-
-  return JSON.stringify(address, null, 2);
-}
-
-function firstRelation<T>(value: T | T[] | null | undefined) {
-  return Array.isArray(value) ? value[0] : value;
+  return lines.length ? lines.join("\n") : "No shipping address";
 }
 
 async function AdminOrdersList() {
@@ -49,26 +53,26 @@ async function AdminOrdersList() {
     .select(
       `
       id,
+      order_number,
       fulfillment_status,
       payment_status,
       total_cents,
       currency,
       shipping_name,
-      shipping_address,
+      shipping_address_line1,
+      shipping_address_line2,
+      shipping_city,
+      shipping_state,
+      shipping_postal_code,
+      shipping_country,
       tracking_number,
       created_at,
       order_items (
         id,
         quantity,
         unit_price_cents,
-        posters (
-          id,
-          title
-        ),
-        variants (
-          id,
-          label
-        )
+        poster_title_snapshot,
+        variant_label_snapshot
       )
       `,
     )
@@ -92,7 +96,9 @@ async function AdminOrdersList() {
         <section key={order.id} className="rounded border p-4">
           <div className="flex flex-wrap justify-between gap-3">
             <div>
-              <p className="font-medium">Order #{order.id}</p>
+              <p className="font-medium">
+                Order {order.order_number ?? `#${order.id}`}
+              </p>
               <p className="text-sm text-muted-foreground">
                 {new Date(order.created_at).toLocaleString()}
               </p>
@@ -108,22 +114,20 @@ async function AdminOrdersList() {
             <p>Ship to: {order.shipping_name ?? "No name provided"}</p>
             <p>Tracking: {order.tracking_number ?? "Not added yet"}</p>
             <pre className="whitespace-pre-wrap rounded bg-muted p-3">
-              {formatAddress(order.shipping_address)}
+              {formatAddress(order)}
             </pre>
           </div>
 
           <div className="mt-4 space-y-2">
             {order.order_items?.map((item) => {
-              const poster = firstRelation(item.posters);
-              const variant = firstRelation(item.variants);
-
               return (
                 <div key={item.id} className="rounded border p-3 text-sm">
                   <p className="font-medium">
-                    {poster?.title ?? "Untitled poster"}
+                    {item.poster_title_snapshot ?? "Untitled poster"}
                   </p>
                   <p className="text-muted-foreground">
-                    {variant?.label ?? "Unknown variant"} x {item.quantity}
+                    {item.variant_label_snapshot ?? "Unknown variant"} x{" "}
+                    {item.quantity}
                   </p>
                   <p>
                     {formatCurrency(item.unit_price_cents, order.currency)}

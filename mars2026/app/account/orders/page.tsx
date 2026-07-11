@@ -8,10 +8,6 @@ function formatCurrency(totalCents: number, currency = "usd") {
   }).format(totalCents / 100);
 }
 
-function firstRelation<T>(value: T | T[] | null | undefined) {
-  return Array.isArray(value) ? value[0] : value;
-}
-
 async function OrdersList() {
   const supabase = await createClient();
 
@@ -27,6 +23,7 @@ async function OrdersList() {
     .select(
       `
       id,
+      order_number,
       fulfillment_status,
       payment_status,
       total_cents,
@@ -36,14 +33,8 @@ async function OrdersList() {
         id,
         quantity,
         unit_price_cents,
-        posters (
-          id,
-          title
-        ),
-        variants (
-          id,
-          label
-        )
+        poster_title_snapshot,
+        variant_label_snapshot
       )
       `,
     )
@@ -68,7 +59,9 @@ async function OrdersList() {
         <section key={order.id} className="rounded border p-4">
           <div className="flex flex-wrap justify-between gap-3">
             <div>
-              <p className="font-medium">Order #{order.id}</p>
+              <p className="font-medium">
+                Order {order.order_number ?? `#${order.id}`}
+              </p>
               <p className="text-sm text-muted-foreground">
                 {new Date(order.created_at).toLocaleDateString()}
               </p>
@@ -85,16 +78,14 @@ async function OrdersList() {
 
           <div className="mt-4 space-y-2">
             {order.order_items?.map((item) => {
-              const poster = firstRelation(item.posters);
-              const variant = firstRelation(item.variants);
-
               return (
                 <div key={item.id} className="rounded border p-3 text-sm">
                   <p className="font-medium">
-                    {poster?.title ?? "Untitled poster"}
+                    {item.poster_title_snapshot ?? "Untitled poster"}
                   </p>
                   <p className="text-muted-foreground">
-                    {variant?.label ?? "Unknown variant"} x {item.quantity}
+                    {item.variant_label_snapshot ?? "Unknown variant"} x{" "}
+                    {item.quantity}
                   </p>
                   <p>
                     {formatCurrency(item.unit_price_cents, order.currency)}

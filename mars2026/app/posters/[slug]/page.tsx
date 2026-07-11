@@ -7,10 +7,15 @@ type PosterPageProps = {
   params: Promise<{
     slug: string;
   }>;
+  searchParams: Promise<{
+    variant?: string;
+  }>;
 };
 
-async function PosterDetails({ params }: PosterPageProps) {
+async function PosterDetails({ params, searchParams }: PosterPageProps) {
   const { slug } = await params;
+  const { variant } = await searchParams;
+  const initialVariantId = variant ? Number(variant) : undefined;
   const supabase = await createClient();
 
   const { data: poster, error: posterError } = await supabase
@@ -46,18 +51,21 @@ async function PosterDetails({ params }: PosterPageProps) {
           {JSON.stringify(variantsError, null, 2)}
         </pre>
       ) : (
-        <VariantPicker variants={variants ?? []} />
+        <VariantPicker
+          variants={variants ?? []}
+          initialVariantId={initialVariantId}
+        />
       )}
     </main>
   );
 }
 
-export default function PosterPage({ params }: PosterPageProps) {
+export default function PosterPage({ params, searchParams }: PosterPageProps) {
   return (
     <Suspense
       fallback={<p className="mx-auto max-w-5xl p-6">Loading poster...</p>}
     >
-      <PosterDetails params={params} />
+      <PosterDetails params={params} searchParams={searchParams} />
     </Suspense>
   );
 }
