@@ -7,6 +7,7 @@ const links = [
   { href: "/", label: "Home" },
   { href: "/shop", label: "Shop" },
   { href: "/archive", label: "Archive" },
+  { href: "/about", label: "About" },
 ];
 
 function isActivePath(pathname: string, href: string) {
@@ -14,6 +15,7 @@ function isActivePath(pathname: string, href: string) {
   if (href === "/shop") {
     return pathname.startsWith("/shop") || pathname.startsWith("/posters");
   }
+  if (href === "/about") return pathname.startsWith("/about");
   return pathname.startsWith("/archive") || pathname.startsWith("/gallery");
 }
 

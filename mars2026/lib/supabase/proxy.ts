@@ -53,6 +53,7 @@ export async function updateSession(request: NextRequest) {
     "/shop",
     "/gallery",
     "/archive",
+    "/about",
     "/posters",
   ];
   const isPublicPath = publicPaths.some((path) =>
