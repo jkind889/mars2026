@@ -46,7 +46,15 @@ export async function updateSession(request: NextRequest) {
   // with the Supabase client, your users may be randomly logged out.
   const { data } = await supabase.auth.getClaims();
   const user = data?.claims;
-  const publicPaths = ["/", "/auth", "/login", "/shop", "/posters"];
+  const publicPaths = [
+    "/",
+    "/auth",
+    "/login",
+    "/shop",
+    "/gallery",
+    "/archive",
+    "/posters",
+  ];
   const isPublicPath = publicPaths.some((path) =>
     path === "/"
       ? request.nextUrl.pathname === path
