@@ -13,6 +13,10 @@ export async function updateSession(request: NextRequest) {
     return supabaseResponse;
   }
 
+  if (request.nextUrl.pathname === "/api/stripe/webhook") {
+    return supabaseResponse;
+  }
+
   // With Fluid compute, don't put this client in a global environment
   // variable. Always create a new one on each request.
   const supabase = createServerClient(
@@ -54,6 +58,8 @@ export async function updateSession(request: NextRequest) {
     "/gallery",
     "/archive",
     "/about",
+    "/commissions",
+    "/contact",
     "/posters",
   ];
   const isPublicPath = publicPaths.some((path) =>
