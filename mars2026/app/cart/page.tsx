@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useMemo, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import { useCart, type CartItem } from "@/components/cart-provider";
@@ -47,6 +47,11 @@ export default function CartPage() {
   const [error, setError] = useState<string | null>(null);
   const [checkoutError, setCheckoutError] = useState<string | null>(null);
   const [isCheckingOut, setIsCheckingOut] = useState(false);
+  const checkoutAttemptIdRef = useRef<string | null>(null);
+
+  useEffect(() => {
+    checkoutAttemptIdRef.current = null;
+  }, [cartItems]);
 
   useEffect(() => {
     if (!isHydrated) {
@@ -147,6 +152,10 @@ export default function CartPage() {
     setIsCheckingOut(true);
     setCheckoutError(null);
 
+    const checkoutAttemptId =
+      checkoutAttemptIdRef.current ?? crypto.randomUUID();
+    checkoutAttemptIdRef.current = checkoutAttemptId;
+
     try {
       const response = await fetch("/api/checkout", {
         method: "POST",
@@ -154,6 +163,7 @@ export default function CartPage() {
           "Content-Type": "application/json",
         },
         body: JSON.stringify({
+          checkoutAttemptId,
           items: cartItems.map(({ variantId, quantity }) => ({
             variantId,
             quantity,
@@ -164,8 +174,13 @@ export default function CartPage() {
       const payload = (await response.json().catch(() => ({}))) as {
         error?: string;
         loginUrl?: string;
+        resetCheckoutAttempt?: boolean;
         url?: string;
       };
+
+      if (payload.resetCheckoutAttempt) {
+        checkoutAttemptIdRef.current = null;
+      }
 
       if (response.status === 401 && payload.loginUrl) {
         window.location.assign(payload.loginUrl);

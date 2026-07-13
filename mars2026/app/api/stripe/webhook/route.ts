@@ -1,7 +1,18 @@
 import { createStripeClient } from "@/lib/stripe";
+import { checkoutSessionMatchesOrder } from "@/lib/checkout-security";
 import { createAdminClient } from "@/lib/supabase/admin";
 import { NextResponse, type NextRequest } from "next/server";
 import type Stripe from "stripe";
+
+type WebhookOrderRow = {
+  id: number;
+  user_id: string | null;
+  stripe_customer_id: string | null;
+  stripe_checkout_session_id: string | null;
+  payment_status: string;
+  subtotal_cents: number | null;
+  currency: string | null;
+};
 
 function getOrderId(session: Stripe.Checkout.Session) {
   const orderId = Number(session.metadata?.order_id);
@@ -19,6 +30,60 @@ function getPaymentIntentId(session: Stripe.Checkout.Session) {
   }
 
   return session.payment_intent?.id ?? null;
+}
+
+function getCustomerId(session: Stripe.Checkout.Session) {
+  if (typeof session.customer === "string") {
+    return session.customer;
+  }
+
+  return session.customer?.id ?? null;
+}
+
+async function loadAndValidateOrder(session: Stripe.Checkout.Session) {
+  const orderId = getOrderId(session);
+  const supabase = createAdminClient();
+  const { data: order, error } = await supabase
+    .from("orders")
+    .select(
+      "id, user_id, stripe_customer_id, stripe_checkout_session_id, payment_status, subtotal_cents, currency",
+    )
+    .eq("id", orderId)
+    .maybeSingle();
+
+  if (error || !order) {
+    throw new Error(
+      `Failed to load order ${orderId}: ${error?.message ?? "Order not found"}`,
+    );
+  }
+
+  const typedOrder = order as WebhookOrderRow;
+  const sessionMatchesOrder = checkoutSessionMatchesOrder(
+    {
+      amountSubtotal: session.amount_subtotal,
+      clientReferenceId: session.client_reference_id,
+      currency: session.currency,
+      customerId: getCustomerId(session),
+      id: session.id,
+      metadataUserId: session.metadata?.user_id,
+      mode: session.mode,
+    },
+    {
+      checkoutSessionId: typedOrder.stripe_checkout_session_id,
+      currency: typedOrder.currency,
+      customerId: typedOrder.stripe_customer_id,
+      subtotalCents: typedOrder.subtotal_cents,
+      userId: typedOrder.user_id,
+    },
+  );
+
+  if (!sessionMatchesOrder) {
+    throw new Error(
+      `Checkout Session ${session.id} does not match order ${orderId}.`,
+    );
+  }
+
+  return typedOrder;
 }
 
 function sessionOrderFields(session: Stripe.Checkout.Session) {
@@ -56,8 +121,16 @@ async function handleSuccessfulCheckout(
     return;
   }
 
-  const orderId = getOrderId(session);
+  const order = await loadAndValidateOrder(session);
+  const orderId = order.id;
   const supabase = createAdminClient();
+
+  if (order.payment_status !== "pending") {
+    console.info(
+      `Order ${orderId} is already ${order.payment_status}; skipping duplicate payment update.`,
+    );
+    return;
+  }
 
   const { data: updatedOrder, error } = await supabase
     .from("orders")
@@ -84,8 +157,16 @@ async function handleSuccessfulCheckout(
 }
 
 async function handleFailedCheckout(session: Stripe.Checkout.Session) {
-  const orderId = getOrderId(session);
+  const order = await loadAndValidateOrder(session);
+  const orderId = order.id;
   const supabase = createAdminClient();
+
+  if (order.payment_status !== "pending") {
+    console.info(
+      `Order ${orderId} is already ${order.payment_status}; skipping failed-payment update.`,
+    );
+    return;
+  }
 
   const { data: updatedOrder, error } = await supabase
     .from("orders")
@@ -111,8 +192,16 @@ async function handleFailedCheckout(session: Stripe.Checkout.Session) {
 }
 
 async function handleExpiredCheckout(session: Stripe.Checkout.Session) {
-  const orderId = getOrderId(session);
+  const order = await loadAndValidateOrder(session);
+  const orderId = order.id;
   const supabase = createAdminClient();
+
+  if (order.payment_status !== "pending") {
+    console.info(
+      `Order ${orderId} is already ${order.payment_status}; skipping expired-session update.`,
+    );
+    return;
+  }
 
   const { data: updatedOrder, error } = await supabase
     .from("orders")

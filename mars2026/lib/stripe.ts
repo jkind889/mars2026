@@ -9,5 +9,6 @@ export function createStripeClient() {
 
   return new Stripe(secretKey, {
     apiVersion: "2026-06-24.dahlia",
+    maxNetworkRetries: 2,
   });
 }

@@ -26,6 +26,7 @@ async function CheckoutSuccessContent({
 }: CheckoutSuccessPageProps) {
   const { session_id: sessionId } = await searchParams;
   let paymentState: "paid" | "processing" | "unverified" = "unverified";
+  let orderNumber: string | null = null;
 
   if (sessionId) {
     const supabase = await createClient();
@@ -48,8 +49,32 @@ async function CheckoutSuccessContent({
         notFound();
       }
 
-      paymentState =
-        session.payment_status === "paid" ? "paid" : "processing";
+      paymentState = "processing";
+
+      const orderId = Number(session.metadata?.order_id);
+
+      if (Number.isInteger(orderId) && orderId > 0) {
+        const { data: order, error: orderError } = await supabase
+          .from("orders")
+          .select("order_number, payment_status, stripe_checkout_session_id")
+          .eq("id", orderId)
+          .eq("user_id", user.id)
+          .maybeSingle();
+
+        if (orderError) {
+          console.error("Failed to verify paid order:", orderError);
+        } else if (order) {
+          orderNumber = order.order_number;
+
+          if (
+            session.payment_status === "paid" &&
+            order.payment_status === "paid" &&
+            order.stripe_checkout_session_id === session.id
+          ) {
+            paymentState = "paid";
+          }
+        }
+      }
     }
   }
 
@@ -67,13 +92,12 @@ async function CheckoutSuccessContent({
       </h1>
       {paymentState === "paid" ? (
         <p className="mt-4 text-muted-foreground">
-          Stripe confirmed your payment. Your cart has been cleared, and the
-          webhook is updating your order history.
+          Your payment and order are confirmed. Your cart has been cleared.
         </p>
       ) : paymentState === "processing" ? (
         <p className="mt-4 text-muted-foreground">
-          Stripe has not confirmed payment yet. Your cart will remain available
-          while the payment finishes processing.
+          We are waiting for the secure payment notification to update your
+          order. Your cart will remain available until it is confirmed.
         </p>
       ) : (
         <p className="mt-4 text-muted-foreground">
@@ -82,9 +106,9 @@ async function CheckoutSuccessContent({
         </p>
       )}
 
-      {sessionId ? (
+      {orderNumber ? (
         <p className="mt-4 rounded border p-3 text-sm text-muted-foreground">
-          Session: {sessionId}
+          Order: {orderNumber}
         </p>
       ) : null}
 
