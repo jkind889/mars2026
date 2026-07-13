@@ -35,6 +35,7 @@ async function AdminOrdersList() {
   const userId = userData?.claims?.sub;
 
   if (!userId) {
+    console.log("here)")
     notFound();
   }
 
@@ -45,6 +46,11 @@ async function AdminOrdersList() {
     .maybeSingle();
 
   if (adminError || !adminUser) {
+    console.log({
+      userId,
+      adminUser,
+      adminError: adminError?.message,
+    });
     notFound();
   }
 

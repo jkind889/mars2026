@@ -3,6 +3,7 @@ import { Geist } from "next/font/google";
 import { ThemeProvider } from "next-themes";
 import { CartProvider } from "@/components/cart-provider";
 import { SiteNavShell } from "@/components/site-nav-shell";
+import { SiteFooter } from "@/components/site-footer";
 import { Suspense } from "react";
 import "./globals.css";
 
@@ -42,6 +43,7 @@ export default function RootLayout({
                 <SiteNavShell />
               </Suspense>
               {children}
+              <SiteFooter />
             </div>
           </CartProvider>
         </ThemeProvider>

@@ -4,6 +4,7 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useCart } from "@/components/cart-provider";
 import { LogoutButton } from "@/components/logout-button";
+import { ThemeSwitcher } from "@/components/theme-switcher";
 
 const links = [
   { href: "/commissions", label: "Commissions" },
@@ -50,6 +51,7 @@ export function SiteNav({ userEmail }: { userEmail: string | null }) {
       </nav>
 
       <div className="site-nav-actions">
+        <ThemeSwitcher />
         <Link
           href="/cart"
           className={isCartActive ? "is-active" : undefined}

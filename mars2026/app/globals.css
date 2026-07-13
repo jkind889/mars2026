@@ -29,6 +29,23 @@
     --chart-4: 43 74% 66%;
     --chart-5: 27 87% 67%;
     --radius: 0.5rem;
+    --site-background: #f5f5f3;
+    --site-foreground: #171717;
+    --site-muted: #858585;
+    --site-muted-strong: #555;
+    --site-muted-soft: #777;
+    --site-quiet: #4d4d4d;
+    --site-surface: #ebebe8;
+    --site-surface-alt: #e9e9e6;
+    --site-strong: #000;
+    --site-inverse: #fff;
+    --site-hover-strong: #292929;
+    --site-placeholder: #b8b8b4;
+    --site-border: rgba(23, 23, 23, 0.14);
+    --site-border-soft: rgba(23, 23, 23, 0.12);
+    --site-border-strong: rgba(23, 23, 23, 0.5);
+    --site-border-input: rgba(23, 23, 23, 0.3);
+    --site-overlay: rgba(23, 23, 23, 0.22);
   }
   .dark {
     --background: 0 0% 3.9%;
@@ -55,19 +72,36 @@
     --chart-3: 30 80% 55%;
     --chart-4: 280 65% 60%;
     --chart-5: 340 75% 55%;
+    --site-background: #151514;
+    --site-foreground: #f5f5f3;
+    --site-muted: #a3a39d;
+    --site-muted-strong: #bdbdb6;
+    --site-muted-soft: #a7a7a1;
+    --site-quiet: #b4b4ad;
+    --site-surface: #242422;
+    --site-surface-alt: #292927;
+    --site-strong: #f5f5f3;
+    --site-inverse: #151514;
+    --site-hover-strong: #deded8;
+    --site-placeholder: #777772;
+    --site-border: rgba(245, 245, 243, 0.18);
+    --site-border-soft: rgba(245, 245, 243, 0.13);
+    --site-border-strong: rgba(245, 245, 243, 0.5);
+    --site-border-input: rgba(245, 245, 243, 0.32);
+    --site-overlay: rgba(0, 0, 0, 0.42);
   }
 }
 
 @layer components {
   .site-layout {
     min-height: 100vh;
-    background: #f5f5f3;
-    color: #171717;
+    background: var(--site-background);
+    color: var(--site-foreground);
   }
 
   .site-nav {
     align-items: center;
-    background: #f5f5f3;
+    background: var(--site-background);
     display: flex;
     font-family: Arial, Helvetica, sans-serif;
     font-size: 11px;
@@ -94,7 +128,7 @@
   }
 
   .home-content h1 {
-    color: #171717;
+    color: var(--site-foreground);
     font-size: clamp(76px, 15vw, 188px);
     font-weight: 500;
     letter-spacing: -0.11em;
@@ -111,7 +145,7 @@
   }
 
   .home-links a {
-    color: #858585;
+    color: var(--site-muted);
     font-size: 11px;
     letter-spacing: 0.02em;
     text-decoration: none;
@@ -121,11 +155,11 @@
 
   .home-links a:hover,
   .home-links a:focus-visible {
-    color: #171717;
+    color: var(--site-foreground);
   }
 
   .site-brand {
-    color: #171717;
+    color: var(--site-foreground);
     font-size: 12px;
     font-weight: 700;
     letter-spacing: 0.12em;
@@ -140,7 +174,7 @@
 
   .site-links a,
   .site-status {
-    color: #858585;
+    color: var(--site-muted);
     text-decoration: none;
     transition: color 180ms ease;
   }
@@ -148,7 +182,7 @@
   .site-links a:hover,
   .site-links a:focus-visible,
   .site-links a.is-active {
-    color: #171717;
+    color: var(--site-foreground);
   }
 
   .site-nav-actions {
@@ -160,7 +194,7 @@
   }
 
   .site-nav-actions a {
-    color: #858585;
+    color: var(--site-muted);
     text-decoration: none;
     transition: color 180ms ease;
   }
@@ -168,7 +202,7 @@
   .site-nav-actions a:hover,
   .site-nav-actions a:focus-visible,
   .site-nav-actions a.is-active {
-    color: #171717;
+    color: var(--site-foreground);
   }
 
   .site-auth-links,
@@ -183,17 +217,17 @@
   }
 
   .site-auth-links a:last-child {
-    border: 1px solid rgba(23, 23, 23, 0.5);
-    color: #171717;
+    border: 1px solid var(--site-border-strong);
+    color: var(--site-foreground);
     padding: 8px 10px;
     transition: background 180ms ease, border-color 180ms ease;
   }
 
   .site-auth-links a:last-child:hover,
   .site-auth-links a:last-child:focus-visible {
-    background: #171717;
-    border-color: #171717;
-    color: #f5f5f3;
+    background: var(--site-foreground);
+    border-color: var(--site-foreground);
+    color: var(--site-background);
   }
 
   .site-user-email {
@@ -208,7 +242,7 @@
     background: transparent;
     border: 0;
     border-radius: 0;
-    color: #858585;
+    color: var(--site-muted);
     font-family: inherit;
     font-size: 11px;
     font-weight: 400;
@@ -221,11 +255,71 @@
   .site-nav .site-nav-logout:hover,
   .site-nav .site-nav-logout:focus-visible {
     background: transparent;
-    color: #171717;
+    color: var(--site-foreground);
+  }
+
+  .site-theme-switcher-button {
+    color: var(--site-muted);
+    height: 28px;
+    padding: 0 4px;
+    width: 28px;
+  }
+
+  .site-theme-switcher-button:hover,
+  .site-theme-switcher-button:focus-visible {
+    color: var(--site-foreground);
+  }
+
+  .site-footer {
+    align-items: flex-end;
+    border-top: 1px solid var(--site-border);
+    display: flex;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 10px;
+    justify-content: space-between;
+    letter-spacing: 0.02em;
+    line-height: 1.35;
+    margin: 0 40px;
+    padding: 24px 0 28px;
+    text-transform: uppercase;
+  }
+
+  .site-footer-intro,
+  .site-footer-links {
+    align-items: flex-start;
+    display: flex;
+    gap: 18px;
+  }
+
+  .site-footer-intro {
+    color: var(--site-muted);
+    flex-direction: column;
+    gap: 6px;
+  }
+
+  .site-footer-brand,
+  .site-footer-links a {
+    color: var(--site-foreground);
+    text-decoration: none;
+  }
+
+  .site-footer-links a {
+    color: var(--site-muted);
+    transition: color 180ms ease;
+  }
+
+  .site-footer-links a:hover,
+  .site-footer-links a:focus-visible {
+    color: var(--site-foreground);
+  }
+
+  .site-footer-copyright {
+    color: var(--site-muted);
+    white-space: nowrap;
   }
 
   .about-page {
-    background: #f5f5f3;
+    background: var(--site-background);
     min-height: calc(100vh - 68px);
     overflow: hidden;
     padding: 0 40px 28px;
@@ -248,15 +342,15 @@
 
   .about-placeholder {
     aspect-ratio: 1;
-    background: #ebebe8;
-    border: 1px solid rgba(23, 23, 23, 0.12);
+    background: var(--site-surface);
+    border: 1px solid var(--site-border-soft);
     border-radius: 50%;
     width: min(34vw, 470px);
   }
 
   .about-cross,
   .about-cross::after {
-    background: rgba(23, 23, 23, 0.22);
+    background: var(--site-overlay);
     content: "";
     height: 1px;
     left: 68%;
@@ -281,7 +375,7 @@
   }
 
   .about-label {
-    color: #858585;
+    color: var(--site-muted);
     font-size: 10px;
     font-weight: 600;
     letter-spacing: 0.06em;
@@ -291,7 +385,7 @@
   }
 
   .about-copy {
-    color: #555;
+    color: var(--site-muted-strong);
     font-size: clamp(15px, 1.3vw, 18px);
     font-weight: 500;
     letter-spacing: -0.025em;
@@ -307,11 +401,11 @@
   }
 
   .about-faq-list {
-    border-top: 1px solid rgba(23, 23, 23, 0.14);
+    border-top: 1px solid var(--site-border);
   }
 
   .about-faq-item {
-    border-bottom: 1px solid rgba(23, 23, 23, 0.14);
+    border-bottom: 1px solid var(--site-border);
   }
 
   .about-faq-item summary {
@@ -332,13 +426,13 @@
 
   .about-faq-item summary:focus-visible,
   .about-social-list a:focus-visible {
-    outline: 1px solid #171717;
+    outline: 1px solid var(--site-foreground);
     outline-offset: 5px;
   }
 
   .about-faq-plus,
   .about-faq-plus::after {
-    background: #858585;
+    background: var(--site-muted);
     content: "";
     display: block;
     height: 1px;
@@ -355,7 +449,7 @@
   }
 
   .about-faq-item > p {
-    color: #777;
+    color: var(--site-muted-soft);
     font-size: 13px;
     line-height: 1.4;
     margin: -2px 32px 18px 0;
@@ -369,7 +463,7 @@
 
   .about-social-list a {
     align-items: center;
-    color: #555;
+    color: var(--site-muted-strong);
     display: flex;
     font-size: 15px;
     font-weight: 500;
@@ -381,12 +475,12 @@
   }
 
   .about-social-list a:hover {
-    color: #171717;
+    color: var(--site-foreground);
   }
 
   .commission-page {
-    background: #f5f5f3;
-    color: #111;
+    background: var(--site-background);
+    color: var(--site-foreground);
     font-family: "Courier New", Courier, monospace;
     min-height: calc(100vh - 68px);
     overflow: hidden;
@@ -401,9 +495,9 @@
   }
 
   .commission-page-nav a {
-    background: #000;
+    background: var(--site-strong);
     border-radius: 17px;
-    color: #fff;
+    color: var(--site-inverse);
     font-family: Arial, Helvetica, sans-serif;
     font-size: 15px;
     font-weight: 600;
@@ -415,7 +509,7 @@
 
   .commission-page-nav a:hover,
   .commission-page-nav a:focus-visible {
-    background: #292929;
+    background: var(--site-hover-strong);
     transform: translateY(-2px);
   }
 
@@ -423,7 +517,7 @@
   .commission-submit:focus-visible,
   .commission-form input:focus-visible,
   .commission-form textarea:focus-visible {
-    outline: 2px solid #111;
+    outline: 2px solid var(--site-foreground);
     outline-offset: 4px;
   }
 
@@ -515,7 +609,7 @@
   }
 
   .commission-label {
-    color: #858585;
+    color: var(--site-muted);
     font-family: Arial, Helvetica, sans-serif;
     font-size: 10px;
     font-weight: 600;
@@ -534,7 +628,7 @@
   }
 
   .commission-contact-intro {
-    color: #555;
+    color: var(--site-muted-strong);
     font-size: 15px;
     line-height: 1.35;
     margin: 20px 0 35px;
@@ -552,7 +646,7 @@
   }
 
   .commission-form-field label {
-    color: #858585;
+    color: var(--site-muted);
     font-family: Arial, Helvetica, sans-serif;
     font-size: 10px;
     font-weight: 600;
@@ -564,9 +658,9 @@
   .commission-form textarea {
     background: transparent;
     border: 0;
-    border-bottom: 1px solid rgba(23, 23, 23, 0.3);
+    border-bottom: 1px solid var(--site-border-input);
     border-radius: 0;
-    color: #111;
+    color: var(--site-foreground);
     font: 16px/1.35 "Courier New", Courier, monospace;
     padding: 5px 0 11px;
     width: 100%;
@@ -579,16 +673,16 @@
 
   .commission-form input:focus,
   .commission-form textarea:focus {
-    border-bottom-color: #111;
+    border-bottom-color: var(--site-foreground);
     outline: 0;
   }
 
   .commission-submit {
     align-items: center;
-    background: #000;
+    background: var(--site-strong);
     border: 0;
     border-radius: 17px;
-    color: #fff;
+    color: var(--site-inverse);
     cursor: pointer;
     display: inline-flex;
     font-family: Arial, Helvetica, sans-serif;
@@ -602,12 +696,12 @@
   }
 
   .commission-submit:hover {
-    background: #292929;
+    background: var(--site-hover-strong);
     transform: translateY(-2px);
   }
 
   .commission-form-note {
-    color: #858585;
+    color: var(--site-muted);
     font-family: Arial, Helvetica, sans-serif;
     font-size: 11px;
     line-height: 1.35;
@@ -615,7 +709,7 @@
   }
 
   .contact-page {
-    background: #f5f5f3;
+    background: var(--site-background);
     min-height: calc(100vh - 68px);
     padding: 9vh 40px 48px;
   }
@@ -643,7 +737,7 @@
   }
 
   .contact-page-copy > p:last-child {
-    color: #555;
+    color: var(--site-muted-strong);
     font-size: clamp(15px, 1.3vw, 18px);
     letter-spacing: -0.025em;
     line-height: 1.25;
@@ -657,12 +751,12 @@
   }
 
   .archive-page {
-    --archive-ink: #171717;
-    --archive-muted: #858585;
-    --archive-line: rgba(23, 23, 23, 0.14);
+    --archive-ink: var(--site-foreground);
+    --archive-muted: var(--site-muted);
+    --archive-line: var(--site-border);
     min-height: 100vh;
     overflow: hidden;
-    background: #f5f5f3;
+    background: var(--site-background);
     color: var(--archive-ink);
     padding: 0 40px 24px;
     position: relative;
@@ -711,7 +805,7 @@
   }
 
   .archive-intro > p:last-child {
-    color: #555;
+    color: var(--site-muted-strong);
     font-size: 13px;
     line-height: 1.35;
     margin: 24px 0 0;
@@ -766,12 +860,12 @@
   .archive-row:hover,
   .archive-row:focus-visible,
   .archive-row.is-active {
-    color: #000;
+    color: var(--site-strong);
     padding-left: 7px;
   }
 
   .archive-row:not(.is-active) {
-    color: #4d4d4d;
+    color: var(--site-quiet);
   }
 
   .archive-row-number,
@@ -804,7 +898,7 @@
   .archive-preview-image,
   .archive-preview-mobile {
     align-items: center;
-    background: #e9e9e6;
+    background: var(--site-surface-alt);
     display: flex;
     justify-content: center;
     overflow: hidden;
@@ -828,7 +922,7 @@
   }
 
   .archive-preview-fallback {
-    color: #b8b8b4;
+    color: var(--site-placeholder);
     font-size: clamp(44px, 8vw, 120px);
     font-weight: 700;
     letter-spacing: -0.12em;
@@ -908,6 +1002,18 @@
 
     .site-user-email {
       max-width: 120px;
+    }
+
+    .site-footer {
+      align-items: flex-start;
+      flex-direction: column;
+      gap: 24px;
+      margin: 0 20px;
+    }
+
+    .site-footer-links {
+      flex-wrap: wrap;
+      gap: 10px 18px;
     }
 
     .home-page {
