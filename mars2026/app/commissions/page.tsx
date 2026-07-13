@@ -27,11 +27,6 @@ function TermList({ terms }: { terms: string[] }) {
 export default function CommissionsPage() {
   return (
     <main className="commission-page">
-      <nav className="commission-page-nav" aria-label="Commission page">
-        <a href="#contact">Contacts</a>
-        <a href="#commission">Commission</a>
-      </nav>
-
       <div className="commission-layout">
         <section
           className="commission-terms"

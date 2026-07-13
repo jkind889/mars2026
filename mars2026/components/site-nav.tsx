@@ -3,16 +3,17 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useCart } from "@/components/cart-provider";
+import { LogoutButton } from "@/components/logout-button";
 
 const links = [
-  { href: "/", label: "Home" },
+  { href: "/commissions", label: "Commissions" },
   { href: "/shop", label: "Shop" },
   { href: "/archive", label: "Archive" },
   { href: "/about", label: "About" },
 ];
 
 function isActivePath(pathname: string, href: string) {
-  if (href === "/") return pathname === "/";
+  if (href === "/commissions") return pathname === "/commissions";
   if (href === "/shop") {
     return pathname.startsWith("/shop") || pathname.startsWith("/posters");
   }
@@ -20,7 +21,7 @@ function isActivePath(pathname: string, href: string) {
   return pathname.startsWith("/archive") || pathname.startsWith("/gallery");
 }
 
-export function SiteNav() {
+export function SiteNav({ userEmail }: { userEmail: string | null }) {
   const pathname = usePathname();
   const { itemCount, isHydrated } = useCart();
   const isCartActive = pathname.startsWith("/cart");
@@ -56,7 +57,23 @@ export function SiteNav() {
         >
           Cart{isHydrated && itemCount ? ` (${itemCount})` : ""}
         </Link>
-        <span className="site-status">Available now</span>
+        {userEmail ? (
+          <div className="site-user">
+            <Link
+              className="site-user-email"
+              href="/account/orders"
+              title={userEmail}
+            >
+              {userEmail}
+            </Link>
+            <LogoutButton className="site-nav-logout" />
+          </div>
+        ) : (
+          <div className="site-auth-links" aria-label="Account">
+            <Link href="/auth/login">Log in</Link>
+            <Link href="/auth/sign-up">Sign up</Link>
+          </div>
+        )}
       </div>
     </header>
   );
