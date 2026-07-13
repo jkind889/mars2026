@@ -112,6 +112,25 @@
     text-align: right;
   }
 
+  .site-nav-actions {
+    align-items: center;
+    display: flex;
+    gap: 18px;
+    min-width: 140px;
+  }
+
+  .site-nav-actions a {
+    color: #858585;
+    text-decoration: none;
+    transition: color 180ms ease;
+  }
+
+  .site-nav-actions a:hover,
+  .site-nav-actions a:focus-visible,
+  .site-nav-actions a.is-active {
+    color: #171717;
+  }
+
   .about-page {
     background: #f5f5f3;
     min-height: calc(100vh - 68px);
@@ -787,6 +806,10 @@
 
     .site-status {
       display: none;
+    }
+
+    .site-nav-actions {
+      min-width: 0;
     }
 
     .about-page {

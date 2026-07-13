@@ -1,7 +1,9 @@
 import type { Metadata } from "next";
 import { Geist } from "next/font/google";
 import { ThemeProvider } from "next-themes";
+import { CartProvider } from "@/components/cart-provider";
 import { SiteNav } from "@/components/site-nav";
+import { Suspense } from "react";
 import "./globals.css";
 
 const defaultUrl = process.env.VERCEL_URL
@@ -34,10 +36,14 @@ export default function RootLayout({
           enableSystem
           disableTransitionOnChange
         >
-          <div className="site-layout">
-            <SiteNav />
-            {children}
-          </div>
+          <CartProvider>
+            <div className="site-layout">
+              <Suspense fallback={null}>
+                <SiteNav />
+              </Suspense>
+              {children}
+            </div>
+          </CartProvider>
         </ThemeProvider>
       </body>
     </html>

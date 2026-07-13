@@ -2,6 +2,7 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
+import { useCart } from "@/components/cart-provider";
 
 const links = [
   { href: "/", label: "Home" },
@@ -21,6 +22,8 @@ function isActivePath(pathname: string, href: string) {
 
 export function SiteNav() {
   const pathname = usePathname();
+  const { itemCount, isHydrated } = useCart();
+  const isCartActive = pathname.startsWith("/cart");
 
   return (
     <header className="site-nav">
@@ -45,7 +48,16 @@ export function SiteNav() {
         })}
       </nav>
 
-      <span className="site-status">Available now</span>
+      <div className="site-nav-actions">
+        <Link
+          href="/cart"
+          className={isCartActive ? "is-active" : undefined}
+          aria-current={isCartActive ? "page" : undefined}
+        >
+          Cart{isHydrated && itemCount ? ` (${itemCount})` : ""}
+        </Link>
+        <span className="site-status">Available now</span>
+      </div>
     </header>
   );
 }
