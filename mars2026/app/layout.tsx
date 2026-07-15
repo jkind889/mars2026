@@ -4,6 +4,7 @@ import { ThemeProvider } from "next-themes";
 import { CartProvider } from "@/components/cart-provider";
 import { SiteNavShell } from "@/components/site-nav-shell";
 import { SiteFooter } from "@/components/site-footer";
+import { SiteOrnaments } from "@/components/site-ornaments";
 import { Suspense } from "react";
 import "./globals.css";
 
@@ -33,7 +34,7 @@ export default function RootLayout({
       <body className={`${geistSans.className} antialiased`}>
         <ThemeProvider
           attribute="class"
-          defaultTheme="system"
+          defaultTheme="light"
           enableSystem
           disableTransitionOnChange
         >
@@ -42,6 +43,7 @@ export default function RootLayout({
               <Suspense fallback={null}>
                 <SiteNavShell />
               </Suspense>
+              <SiteOrnaments />
               {children}
               <SiteFooter />
             </div>

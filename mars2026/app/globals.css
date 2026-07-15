@@ -29,7 +29,7 @@
     --chart-4: 43 74% 66%;
     --chart-5: 27 87% 67%;
     --radius: 0.5rem;
-    --site-background: #f5f5f3;
+    --site-background: #fbfbfa;
     --site-foreground: #171717;
     --site-muted: #858585;
     --site-muted-strong: #555;
@@ -94,14 +94,20 @@
 
 @layer components {
   .site-layout {
-    min-height: 100vh;
     background: var(--site-background);
     color: var(--site-foreground);
+    min-height: 100vh;
+    position: relative;
+  }
+
+  .site-layout > :not(.site-nav):not(.site-ornaments) {
+    position: relative;
+    z-index: 1;
   }
 
   .site-nav {
     align-items: center;
-    background: var(--site-background);
+    background: transparent;
     display: flex;
     font-family: Arial, Helvetica, sans-serif;
     font-size: 11px;
@@ -116,24 +122,161 @@
 
   .home-page {
     align-items: center;
+    background: transparent;
     display: flex;
     justify-content: center;
-    min-height: calc(100vh - 68px);
+    min-height: calc(100svh - 68px);
+    overflow: visible;
     padding: 40px;
+    position: relative;
+  }
+
+  .site-nav-home .site-links {
+    margin-left: 5%;
+  }
+
+  .site-ornaments {
+    height: 100svh;
+    inset: 0 0 auto;
+    overflow: hidden;
+    pointer-events: none;
+    position: absolute;
+    z-index: 0;
+  }
+
+  .site-ornament {
+    position: absolute;
+  }
+
+  .site-ornament img {
+    height: 100%;
+    object-fit: contain;
+    width: 100%;
+  }
+
+  .site-ornament-shadow {
+    opacity: 0.7;
+    transform: translate(7%, 5%);
+  }
+
+  .site-ornament-art {
+    transform: translate(0, 0);
+  }
+
+  .site-ornament-fish-top-left {
+    aspect-ratio: 615 / 877;
+    left: -8vw;
+    opacity: 0.62;
+    top: -12vh;
+    transform: rotate(-12deg);
+    width: min(14vw, 210px);
+  }
+
+  .site-ornament-coral-top-right {
+    aspect-ratio: 195 / 263;
+    opacity: 0.72;
+    right: 12vw;
+    top: -15vh;
+    transform: rotate(193deg);
+    width: min(10vw, 150px);
+  }
+
+  .site-ornament-fish-right {
+    aspect-ratio: 615 / 877;
+    opacity: 0.22;
+    right: -15vw;
+    top: 38%;
+    transform: rotate(84deg);
+    width: min(16vw, 240px);
+  }
+
+  .site-ornament-fish-bottom-left {
+    aspect-ratio: 615 / 877;
+    display: none;
+    transform: rotate(-27deg);
+  }
+
+  .site-ornament-coral-bottom-left {
+    aspect-ratio: 195 / 263;
+    bottom: -22vh;
+    left: -4vw;
+    opacity: 0.55;
+    transform: rotate(-18deg);
+    width: min(13vw, 195px);
+  }
+
+  .site-ornament-coral-bottom-right {
+    aspect-ratio: 195 / 263;
+    bottom: -18vh;
+    display: none;
+    opacity: 0.55;
+    right: -3vw;
+    transform: rotate(17deg);
+    width: min(12vw, 180px);
+  }
+
+  .site-nav-home ~ .site-ornaments .site-ornament-fish-top-left {
+    left: -8.7vw;
+    opacity: 1;
+    top: -9.2vh;
+    width: min(18vw, 270px);
+  }
+
+  .site-nav-home ~ .site-ornaments .site-ornament-coral-top-right {
+    opacity: 1;
+    right: 13.9vw;
+    top: -14.2vh;
+    width: min(10.95vw, 164px);
+  }
+
+  .site-nav-home ~ .site-ornaments .site-ornament-fish-right {
+    opacity: 1;
+    right: 5.65vw;
+    top: 27.3%;
+    width: min(18.7vw, 280px);
+  }
+
+  .site-nav-home ~ .site-ornaments .site-ornament-fish-bottom-left {
+    bottom: -0.2vh;
+    display: block;
+    left: 6.75vw;
+    opacity: 1;
+    width: min(19vw, 280px);
+  }
+
+  .site-nav-home ~ .site-ornaments .site-ornament-coral-bottom-left {
+    bottom: -31.8vh;
+    left: -5vw;
+    opacity: 1;
+    width: min(18.4vw, 276px);
+  }
+
+  .site-nav-home ~ .site-ornaments .site-ornament-coral-bottom-right {
+    bottom: -14.3vh;
+    display: block;
+    opacity: 1;
+    right: -1vw;
+    width: min(14vw, 210px);
   }
 
   .home-content {
+    left: 0.85vw;
+    position: relative;
     text-align: center;
+    transform: translateY(-1.7vh);
     width: min(100%, 720px);
+    z-index: 1;
   }
 
   .home-content h1 {
     color: var(--site-foreground);
-    font-size: clamp(76px, 15vw, 188px);
-    font-weight: 500;
-    letter-spacing: -0.11em;
-    line-height: 0.8;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: clamp(96px, 11vw, 200px);
+    font-weight: 700;
+    letter-spacing: -0.164em;
+    line-height: 0.78;
     margin: 0;
+    padding-right: 0.13em;
   }
 
   .home-links {
@@ -141,7 +284,7 @@
     flex-wrap: wrap;
     gap: 12px 28px;
     justify-content: center;
-    margin: 48px auto 0;
+    margin: 36px auto 0;
   }
 
   .home-links a {
@@ -319,7 +462,7 @@
   }
 
   .about-page {
-    background: var(--site-background);
+    background: transparent;
     min-height: calc(100vh - 68px);
     overflow: hidden;
     padding: 0 40px 28px;
@@ -479,7 +622,7 @@
   }
 
   .commission-page {
-    background: var(--site-background);
+    background: transparent;
     color: var(--site-foreground);
     font-family: "Courier New", Courier, monospace;
     min-height: calc(100vh - 68px);
@@ -524,8 +667,7 @@
   .commission-layout {
     align-items: start;
     display: grid;
-    gap: 5.5vw;
-    grid-template-columns: minmax(0, 2.1fr) minmax(310px, 0.72fr);
+    grid-template-columns: minmax(0, 1fr);
   }
 
   .commission-terms {
@@ -552,6 +694,33 @@
     line-height: 1.25;
     margin: 27px auto 0;
     max-width: 1050px;
+  }
+
+  .commission-contact-link {
+    background: var(--site-strong);
+    border-radius: 17px;
+    color: var(--site-inverse);
+    display: inline-flex;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 13px;
+    font-weight: 600;
+    gap: 15px;
+    line-height: 1;
+    margin-top: 30px;
+    padding: 15px 21px;
+    text-decoration: none;
+    transition: background 180ms ease, transform 180ms ease;
+  }
+
+  .commission-contact-link:hover,
+  .commission-contact-link:focus-visible {
+    background: var(--site-hover-strong);
+    transform: translateY(-2px);
+  }
+
+  .commission-contact-link:focus-visible {
+    outline: 2px solid var(--site-foreground);
+    outline-offset: 4px;
   }
 
   .commission-terms-grid {
@@ -602,12 +771,6 @@
     margin-top: 36px;
   }
 
-  .commission-contact {
-    max-width: 410px;
-    padding: 6px 3vw 0 0;
-    scroll-margin-top: 28px;
-  }
-
   .commission-label {
     color: var(--site-muted);
     font-family: Arial, Helvetica, sans-serif;
@@ -617,22 +780,6 @@
     line-height: 1;
     margin: 0 0 17px;
     text-transform: uppercase;
-  }
-
-  .commission-contact h2 {
-    font-size: clamp(24px, 2vw, 34px);
-    font-weight: 700;
-    letter-spacing: -0.07em;
-    line-height: 1;
-    margin: 0;
-  }
-
-  .commission-contact-intro {
-    color: var(--site-muted-strong);
-    font-size: 15px;
-    line-height: 1.35;
-    margin: 20px 0 35px;
-    max-width: 350px;
   }
 
   .commission-form {
@@ -709,7 +856,7 @@
   }
 
   .contact-page {
-    background: var(--site-background);
+    background: transparent;
     min-height: calc(100vh - 68px);
     padding: 9vh 40px 48px;
   }
@@ -756,7 +903,7 @@
     --archive-line: var(--site-border);
     min-height: 100vh;
     overflow: hidden;
-    background: var(--site-background);
+    background: transparent;
     color: var(--archive-ink);
     padding: 0 40px 24px;
     position: relative;
@@ -820,6 +967,34 @@
     margin-top: 20vh;
   }
 
+  .archive-catalog {
+    display: flex;
+    flex-direction: column;
+    gap: 28px;
+    min-width: 0;
+  }
+
+  .archive-search {
+    display: grid;
+    gap: 10px;
+    max-width: 360px;
+  }
+
+  .archive-search-meta {
+    align-items: center;
+    color: var(--archive-muted);
+    display: flex;
+    font-size: 9px;
+    gap: 18px;
+    justify-content: space-between;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+  }
+
+  .archive-search-meta label {
+    color: var(--archive-ink);
+  }
+
   .archive-table-wrap {
     min-width: 0;
   }
@@ -841,6 +1016,14 @@
 
   .archive-table {
     border-bottom: 1px solid var(--archive-line);
+  }
+
+  .archive-search-empty {
+    color: var(--archive-muted);
+    font-size: 12px;
+    margin: 0;
+    min-height: 110px;
+    padding: 28px 0;
   }
 
   .archive-row {
@@ -1017,8 +1200,84 @@
     }
 
     .home-page {
-      min-height: calc(100vh - 112px);
+      min-height: calc(100svh - 112px);
       padding: 32px 20px 48px;
+    }
+
+    .home-content {
+      left: 0;
+      transform: translateY(0);
+    }
+
+    .site-nav:not(.site-nav-home) ~ .site-ornaments .site-ornament-fish-top-left {
+      left: -24vw;
+      opacity: 0.48;
+      top: -6vh;
+      width: 39vw;
+    }
+
+    .site-nav:not(.site-nav-home) ~ .site-ornaments .site-ornament-coral-top-right {
+      opacity: 0.55;
+      right: -8vw;
+      top: -8vh;
+      width: 25vw;
+    }
+
+    .site-nav:not(.site-nav-home) ~ .site-ornaments .site-ornament-fish-right {
+      opacity: 0.22;
+      right: -38vw;
+      top: 58%;
+      width: 48vw;
+    }
+
+    .site-nav:not(.site-nav-home) ~ .site-ornaments .site-ornament-coral-bottom-left {
+      bottom: -10vh;
+      left: -12vw;
+      opacity: 0.42;
+      width: 30vw;
+    }
+
+    .site-nav:not(.site-nav-home) ~ .site-ornaments .site-ornament-coral-bottom-right {
+      bottom: -9vh;
+      opacity: 0.42;
+      right: -12vw;
+      width: 30vw;
+    }
+
+    .site-nav-home ~ .site-ornaments .site-ornament-fish-top-left {
+      left: -18vw;
+      top: -2vh;
+      width: 48vw;
+    }
+
+    .site-nav-home ~ .site-ornaments .site-ornament-coral-top-right {
+      right: 0;
+      top: -6vh;
+      width: 30vw;
+    }
+
+    .site-nav-home ~ .site-ornaments .site-ornament-fish-right {
+      right: -23vw;
+      top: 58%;
+      width: 57vw;
+    }
+
+    .site-nav-home ~ .site-ornaments .site-ornament-fish-bottom-left {
+      bottom: -9vh;
+      left: -10vw;
+      width: 52vw;
+    }
+
+    .site-nav-home ~ .site-ornaments .site-ornament-coral-bottom-left {
+      bottom: -6vh;
+      left: -8vw;
+      width: 31vw;
+    }
+
+    .site-nav-home ~ .site-ornaments .site-ornament-coral-bottom-right {
+      bottom: -7vh;
+      right: -8vw;
+      width: 34vw;
     }
 
     .home-links {
@@ -1095,7 +1354,6 @@
     .commission-layout {
       display: flex;
       flex-direction: column;
-      gap: 0;
     }
 
     .commission-header h1 {
@@ -1130,20 +1388,6 @@
 
     .commission-term-list li + li {
       margin-top: 27px;
-    }
-
-    .commission-contact {
-      max-width: none;
-      padding: 68px 0 0;
-    }
-
-    .commission-contact h2 {
-      font-size: 28px;
-    }
-
-    .commission-contact-intro {
-      font-size: 14px;
-      margin-bottom: 30px;
     }
 
     .contact-page {
@@ -1198,10 +1442,19 @@
       margin-top: 0;
     }
 
+    .archive-search {
+      max-width: none;
+      width: 100%;
+    }
+
+    .archive-catalog {
+      gap: 34px;
+      width: 100%;
+    }
+
     .archive-preview-mobile {
       display: flex;
       height: min(80vw, 460px);
-      order: 0;
       width: 100%;
     }
 
@@ -1211,7 +1464,6 @@
     }
 
     .archive-table-wrap {
-      order: 1;
       width: 100%;
     }
 

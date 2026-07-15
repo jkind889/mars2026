@@ -1,4 +1,4 @@
-import { ContactForm } from "@/components/contact-form";
+import Link from "next/link";
 
 const usageTerms = [
   "Sharing the PSD file of the work will be an additional charge of 50% of the base price on top of the agreed on price",
@@ -39,6 +39,9 @@ export default function CommissionsPage() {
               As the client you&apos;re responsible for adhering and reading the
               terms listed here
             </p>
+            <Link className="commission-contact-link" href="/contact">
+              Start a commission <span aria-hidden="true">↗</span>
+            </Link>
           </header>
 
           <div className="commission-terms-grid">
@@ -55,16 +58,6 @@ export default function CommissionsPage() {
             <TermList terms={paymentTerms} />
           </div>
         </section>
-
-        <aside className="commission-contact" id="contact" aria-labelledby="contact-title">
-          <p className="commission-label">Contact</p>
-          <h2 id="contact-title">Start a commission</h2>
-          <p className="commission-contact-intro">
-            Tell me a little about your idea, and I&apos;ll get back to you by
-            email.
-          </p>
-          <ContactForm />
-        </aside>
       </div>
     </main>
   );

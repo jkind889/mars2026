@@ -119,8 +119,8 @@ async function CheckoutSuccessContent({
         >
           View orders
         </Link>
-        <Link className="rounded border px-5 py-3" href="/shop">
-          Back to shop
+        <Link className="rounded border px-5 py-3" href="/archive">
+          Browse more posters
         </Link>
       </div>
     </main>

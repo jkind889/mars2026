@@ -223,7 +223,7 @@ export default function CartPage() {
           Your cart is empty. Find a poster to get started.
         </p>
         <Button asChild className="mt-6">
-          <Link href="/shop">Continue shopping</Link>
+          <Link href="/archive">Browse posters</Link>
         </Button>
       </main>
     );
@@ -238,8 +238,8 @@ export default function CartPage() {
           </p>
           <h1 className="mt-3 text-3xl font-semibold">Your cart</h1>
         </div>
-        <Link className="text-sm underline underline-offset-4" href="/shop">
-          Continue shopping
+        <Link className="text-sm underline underline-offset-4" href="/archive">
+          Continue browsing
         </Link>
       </div>
 

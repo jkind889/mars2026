@@ -8,27 +8,30 @@ import { ThemeSwitcher } from "@/components/theme-switcher";
 
 const links = [
   { href: "/commissions", label: "Commissions" },
-  { href: "/shop", label: "Shop" },
+  { href: "/contact", label: "Contact" },
   { href: "/archive", label: "Archive" },
   { href: "/about", label: "About" },
 ];
 
 function isActivePath(pathname: string, href: string) {
   if (href === "/commissions") return pathname === "/commissions";
-  if (href === "/shop") {
-    return pathname.startsWith("/shop") || pathname.startsWith("/posters");
-  }
+  if (href === "/contact") return pathname.startsWith("/contact");
   if (href === "/about") return pathname.startsWith("/about");
-  return pathname.startsWith("/archive") || pathname.startsWith("/gallery");
+  return (
+    pathname.startsWith("/archive") ||
+    pathname.startsWith("/gallery") ||
+    pathname.startsWith("/posters")
+  );
 }
 
 export function SiteNav({ userEmail }: { userEmail: string | null }) {
   const pathname = usePathname();
   const { itemCount, isHydrated } = useCart();
   const isCartActive = pathname.startsWith("/cart");
+  const className = pathname === "/" ? "site-nav site-nav-home" : "site-nav";
 
   return (
-    <header className="site-nav">
+    <header className={className}>
       <Link className="site-brand" href="/" aria-label="MARS home">
         MARS
       </Link>

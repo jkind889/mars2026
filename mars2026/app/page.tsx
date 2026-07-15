@@ -1,10 +1,9 @@
 import Link from "next/link";
 
 const homeLinks = [
-  { href: "/gallery", label: "Gallery" },
+  { href: "/archive", label: "Archive" },
   { href: "/commissions", label: "Commissions" },
   { href: "/contact", label: "Contact" },
-  { href: "/shop", label: "Shop" },
   { href: "/about", label: "About" },
 ];
 
