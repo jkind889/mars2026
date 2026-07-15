@@ -2,14 +2,56 @@
   "bucket": "poster-preview-images",
   "posters": [
     {
-      "title": "butterfly",
-      "slug": "loona-butterfly",
-      "description": "Track 2",
+      "title": "whiplash - aespa",
+      "slug": "whiplash-aespa",
+      "collection": "kpop",
       "status": "active",
-      "storagePath": "butterfly.png",
+      "storagePath": "aespa1.png",
       "variants": [
         {
-          "sku": "BUTTERFLY-11X17-MATTE",
+          "sku": "WHIPLASH-AESPA-17X11-MATTE",
+          "label": "17x11 Matte",
+          "widthIn": 17,
+          "heightIn": 11,
+          "paperType": "matte",
+          "priceCents": 3500,
+          "currency": "usd",
+          "isActive": true,
+          "productionNotes": "Print at 17x11 on matte paper."
+        },
+        {
+          "sku": "WHIPLASH-AESPA-24X18-MATTE",
+          "label": "24x18 Matte",
+          "widthIn": 24,
+          "heightIn": 18,
+          "paperType": "matte",
+          "priceCents": 5500,
+          "currency": "usd",
+          "isActive": true,
+          "productionNotes": "Print at 24x18 on matte paper."
+        },
+        {
+          "sku": "WHIPLASH-AESPA-36X24-MATTE",
+          "label": "36x24 Matte",
+          "widthIn": 36,
+          "heightIn": 24,
+          "paperType": "matte",
+          "priceCents": 8000,
+          "currency": "usd",
+          "isActive": true,
+          "productionNotes": "Print at 36x24 on matte paper."
+        }
+      ]
+    },
+    {
+      "title": "this is how tommorow moves",
+      "slug": "this-is-how-tommorow-moves",
+      "collection": "singers",
+      "status": "active",
+      "storagePath": "beav2 (1).png",
+      "variants": [
+        {
+          "sku": "THIS-HOW-TOMMOROW-MOVES-11X17-MATTE",
           "label": "11x17 Matte",
           "widthIn": 11,
           "heightIn": 17,
@@ -20,7 +62,7 @@
           "productionNotes": "Print at 11x17 on matte paper."
         },
         {
-          "sku": "BUTTERFLY-18X24-MATTE",
+          "sku": "THIS-HOW-TOMMOROW-MOVES-18X24-MATTE",
           "label": "18x24 Matte",
           "widthIn": 18,
           "heightIn": 24,
@@ -31,7 +73,7 @@
           "productionNotes": "Print at 18x24 on matte paper."
         },
         {
-          "sku": "BUTTERFLY-24X36-MATTE",
+          "sku": "THIS-HOW-TOMMOROW-MOVES-24X36-MATTE",
           "label": "24x36 Matte",
           "widthIn": 24,
           "heightIn": 36,
@@ -44,14 +86,14 @@
       ]
     },
     {
-      "title": "xoxo my cyberlove",
-      "slug": "xoxo-chuu",
-      "description": "xoxo my cyberlove - chuu",
+      "title": "savior",
+      "slug": "savior-heejin",
+      "collection": "kpop",
       "status": "active",
-      "storagePath": "chuu.png",
+      "storagePath": "heejinpo.png",
       "variants": [
         {
-          "sku": "CYBERLOVE-11X17-MATTE",
+          "sku": "SAVIOR-HEEJIN-11X17-MATTE",
           "label": "11x17 Matte",
           "widthIn": 11,
           "heightIn": 17,
@@ -62,18 +104,7 @@
           "productionNotes": "Print at 11x17 on matte paper."
         },
         {
-          "sku": "CYBERLOVE-24X36-MATTE",
-          "label": "24x36 Matte",
-          "widthIn": 24,
-          "heightIn": 36,
-          "paperType": "matte",
-          "priceCents": 8000,
-          "currency": "usd",
-          "isActive": true,
-          "productionNotes": "Print at 24x36 on matte paper."
-        },
-        {
-          "sku": "CYBERLOVE-18X24-MATTE",
+          "sku": "SAVIOR-HEEJIN-18X24-MATTE",
           "label": "18x24 Matte",
           "widthIn": 18,
           "heightIn": 24,
@@ -82,18 +113,29 @@
           "currency": "usd",
           "isActive": true,
           "productionNotes": "Print at 18x24 on matte paper."
+        },
+        {
+          "sku": "SAVIOR-HEEJIN-24X36-MATTE",
+          "label": "24x36 Matte",
+          "widthIn": 24,
+          "heightIn": 36,
+          "paperType": "matte",
+          "priceCents": 8000,
+          "currency": "usd",
+          "isActive": true,
+          "productionNotes": "Print at 24x36 on matte paper."
         }
       ]
     },
     {
-      "title": "tranquil conduct",
-      "slug": "the-goldfish",
-      "description": "me like goldfish",
+      "title": "<savior>",
+      "slug": "savior-heejin-2",
+      "collection": "kpop",
       "status": "active",
-      "storagePath": "goldfish.png",
+      "storagePath": "heejinposter2.png",
       "variants": [
         {
-          "sku": "GOLDFISH-11X17-MATTE",
+          "sku": "SAVIOR-HEEJIN-2-11X17-MATTE",
           "label": "11x17 Matte",
           "widthIn": 11,
           "heightIn": 17,
@@ -104,18 +146,7 @@
           "productionNotes": "Print at 11x17 on matte paper."
         },
         {
-          "sku": "GOLDFISH-24X36-MATTE",
-          "label": "24x36 Matte",
-          "widthIn": 24,
-          "heightIn": 36,
-          "paperType": "matte",
-          "priceCents": 8000,
-          "currency": "usd",
-          "isActive": true,
-          "productionNotes": "Print at 24x36 on matte paper."
-        },
-        {
-          "sku": "GOLDFISH-18X24-MATTE",
+          "sku": "SAVIOR-HEEJIN-2-18X24-MATTE",
           "label": "18x24 Matte",
           "widthIn": 18,
           "heightIn": 24,
@@ -124,18 +155,29 @@
           "currency": "usd",
           "isActive": true,
           "productionNotes": "Print at 18x24 on matte paper."
+        },
+        {
+          "sku": "SAVIOR-HEEJIN-2-24X36-MATTE",
+          "label": "24x36 Matte",
+          "widthIn": 24,
+          "heightIn": 36,
+          "paperType": "matte",
+          "priceCents": 8000,
+          "currency": "usd",
+          "isActive": true,
+          "productionNotes": "Print at 24x36 on matte paper."
         }
       ]
     },
     {
-      "title": "LEMONADE - 2nd Studio Album",
-      "slug": "aespa-lemonade",
-      "description": "I'll make it lemonade haha... ",
+      "title": "hxh",
+      "slug": "hxh",
+      "collection": "anime",
       "status": "active",
-      "storagePath": "lemonade.png",
+      "storagePath": "hunter.png",
       "variants": [
         {
-          "sku": "LEMONADE-11X17-MATTE",
+          "sku": "HXH-11X17-MATTE",
           "label": "11x17 Matte",
           "widthIn": 11,
           "heightIn": 17,
@@ -146,18 +188,7 @@
           "productionNotes": "Print at 11x17 on matte paper."
         },
         {
-          "sku": "LEMONADE-24X36-MATTE",
-          "label": "24x36 Matte",
-          "widthIn": 24,
-          "heightIn": 36,
-          "paperType": "matte",
-          "priceCents": 8000,
-          "currency": "usd",
-          "isActive": true,
-          "productionNotes": "Print at 24x36 on matte paper."
-        },
-        {
-          "sku": "LEMONADE-18X24-MATTE",
+          "sku": "HXH-18X24-MATTE",
           "label": "18x24 Matte",
           "widthIn": 18,
           "heightIn": 24,
@@ -166,18 +197,29 @@
           "currency": "usd",
           "isActive": true,
           "productionNotes": "Print at 18x24 on matte paper."
+        },
+        {
+          "sku": "HXH-24X36-MATTE",
+          "label": "24x36 Matte",
+          "widthIn": 24,
+          "heightIn": 36,
+          "paperType": "matte",
+          "priceCents": 8000,
+          "currency": "usd",
+          "isActive": true,
+          "productionNotes": "Print at 24x36 on matte paper."
         }
       ]
     },
     {
-      "title": "Serenity in Motion",
-      "slug": "serenity-koifish",
-      "description": "core values",
+      "title": "lemontang - h2h",
+      "slug": "lemontang-h2h",
+      "collection": "kpop",
       "status": "active",
-      "storagePath": "koifish.png",
+      "storagePath": "lemontang.png",
       "variants": [
         {
-          "sku": "KOIFISH-11X17-MATTE",
+          "sku": "LEMONTANG-H2H-11X17-MATTE",
           "label": "11x17 Matte",
           "widthIn": 11,
           "heightIn": 17,
@@ -188,18 +230,7 @@
           "productionNotes": "Print at 11x17 on matte paper."
         },
         {
-          "sku": "KOIFISH-24X36-MATTE",
-          "label": "24x36 Matte",
-          "widthIn": 24,
-          "heightIn": 36,
-          "paperType": "matte",
-          "priceCents": 8000,
-          "currency": "usd",
-          "isActive": true,
-          "productionNotes": "Print at 24x36 on matte paper."
-        },
-        {
-          "sku": "KOIFISH-18X24-MATTE",
+          "sku": "LEMONTANG-H2H-18X24-MATTE",
           "label": "18x24 Matte",
           "widthIn": 18,
           "heightIn": 24,
@@ -208,6 +239,353 @@
           "currency": "usd",
           "isActive": true,
           "productionNotes": "Print at 18x24 on matte paper."
+        },
+        {
+          "sku": "LEMONTANG-H2H-24X36-MATTE",
+          "label": "24x36 Matte",
+          "widthIn": 24,
+          "heightIn": 36,
+          "paperType": "matte",
+          "priceCents": 8000,
+          "currency": "usd",
+          "isActive": true,
+          "productionNotes": "Print at 24x36 on matte paper."
+        }
+      ]
+    },
+    {
+      "title": "minju - illit",
+      "slug": "minju-illit",
+      "collection": "kpop",
+      "status": "active",
+      "storagePath": "minju.png",
+      "variants": [
+        {
+          "sku": "MINJU-ILLIT-11X17-MATTE",
+          "label": "11x17 Matte",
+          "widthIn": 11,
+          "heightIn": 17,
+          "paperType": "matte",
+          "priceCents": 3500,
+          "currency": "usd",
+          "isActive": true,
+          "productionNotes": "Print at 11x17 on matte paper."
+        },
+        {
+          "sku": "MINJU-ILLIT-18X24-MATTE",
+          "label": "18x24 Matte",
+          "widthIn": 18,
+          "heightIn": 24,
+          "paperType": "matte",
+          "priceCents": 5500,
+          "currency": "usd",
+          "isActive": true,
+          "productionNotes": "Print at 18x24 on matte paper."
+        },
+        {
+          "sku": "MINJU-ILLIT-24X36-MATTE",
+          "label": "24x36 Matte",
+          "widthIn": 24,
+          "heightIn": 36,
+          "paperType": "matte",
+          "priceCents": 8000,
+          "currency": "usd",
+          "isActive": true,
+          "productionNotes": "Print at 24x36 on matte paper."
+        }
+      ]
+    },
+    {
+      "title": "evangelion",
+      "slug": "evangelion",
+      "collection": "anime",
+      "status": "active",
+      "storagePath": "neweva.png",
+      "variants": [
+        {
+          "sku": "EVANGELION-11X17-MATTE",
+          "label": "11x17 Matte",
+          "widthIn": 11,
+          "heightIn": 17,
+          "paperType": "matte",
+          "priceCents": 3500,
+          "currency": "usd",
+          "isActive": true,
+          "productionNotes": "Print at 11x17 on matte paper."
+        },
+        {
+          "sku": "EVANGELION-18X24-MATTE",
+          "label": "18x24 Matte",
+          "widthIn": 18,
+          "heightIn": 24,
+          "paperType": "matte",
+          "priceCents": 5500,
+          "currency": "usd",
+          "isActive": true,
+          "productionNotes": "Print at 18x24 on matte paper."
+        },
+        {
+          "sku": "EVANGELION-24X36-MATTE",
+          "label": "24x36 Matte",
+          "widthIn": 24,
+          "heightIn": 36,
+          "paperType": "matte",
+          "priceCents": 8000,
+          "currency": "usd",
+          "isActive": true,
+          "productionNotes": "Print at 24x36 on matte paper."
+        }
+      ]
+    },
+    {
+      "title": "soi fon",
+      "slug": "soi-fon",
+      "collection": "weapon analysis",
+      "status": "active",
+      "storagePath": "soifon.png",
+      "variants": [
+        {
+          "sku": "SOI-FON-11X17-MATTE",
+          "label": "11x17 Matte",
+          "widthIn": 11,
+          "heightIn": 17,
+          "paperType": "matte",
+          "priceCents": 3500,
+          "currency": "usd",
+          "isActive": true,
+          "productionNotes": "Print at 11x17 on matte paper."
+        },
+        {
+          "sku": "SOI-FON-18X24-MATTE",
+          "label": "18x24 Matte",
+          "widthIn": 18,
+          "heightIn": 24,
+          "paperType": "matte",
+          "priceCents": 5500,
+          "currency": "usd",
+          "isActive": true,
+          "productionNotes": "Print at 18x24 on matte paper."
+        },
+        {
+          "sku": "SOI-FON-24X36-MATTE",
+          "label": "24x36 Matte",
+          "widthIn": 24,
+          "heightIn": 36,
+          "paperType": "matte",
+          "priceCents": 8000,
+          "currency": "usd",
+          "isActive": true,
+          "productionNotes": "Print at 24x36 on matte paper."
+        }
+      ]
+    },
+    {
+      "title": "souleater",
+      "slug": "souleater",
+      "collection": "anime",
+      "status": "active",
+      "storagePath": "souleater.png",
+      "variants": [
+        {
+          "sku": "SOULEATER-17X11-MATTE",
+          "label": "17x11 Matte",
+          "widthIn": 17,
+          "heightIn": 11,
+          "paperType": "matte",
+          "priceCents": 3500,
+          "currency": "usd",
+          "isActive": true,
+          "productionNotes": "Print at 17x11 on matte paper."
+        },
+        {
+          "sku": "SOULEATER-24X18-MATTE",
+          "label": "24x18 Matte",
+          "widthIn": 24,
+          "heightIn": 18,
+          "paperType": "matte",
+          "priceCents": 5500,
+          "currency": "usd",
+          "isActive": true,
+          "productionNotes": "Print at 24x18 on matte paper."
+        },
+        {
+          "sku": "SOULEATER-36X24-MATTE",
+          "label": "36x24 Matte",
+          "widthIn": 36,
+          "heightIn": 24,
+          "paperType": "matte",
+          "priceCents": 8000,
+          "currency": "usd",
+          "isActive": true,
+          "productionNotes": "Print at 36x24 on matte paper."
+        }
+      ]
+    },
+    {
+      "title": "spiderlily",
+      "slug": "spiderlily",
+      "collection": "mars26",
+      "status": "active",
+      "storagePath": "spiderlilyposter.png",
+      "variants": [
+        {
+          "sku": "SPIDERLILY-11X17-MATTE",
+          "label": "11x17 Matte",
+          "widthIn": 11,
+          "heightIn": 17,
+          "paperType": "matte",
+          "priceCents": 3500,
+          "currency": "usd",
+          "isActive": true,
+          "productionNotes": "Print at 11x17 on matte paper."
+        },
+        {
+          "sku": "SPIDERLILY-18X24-MATTE",
+          "label": "18x24 Matte",
+          "widthIn": 18,
+          "heightIn": 24,
+          "paperType": "matte",
+          "priceCents": 5500,
+          "currency": "usd",
+          "isActive": true,
+          "productionNotes": "Print at 18x24 on matte paper."
+        },
+        {
+          "sku": "SPIDERLILY-24X36-MATTE",
+          "label": "24x36 Matte",
+          "widthIn": 24,
+          "heightIn": 36,
+          "paperType": "matte",
+          "priceCents": 8000,
+          "currency": "usd",
+          "isActive": true,
+          "productionNotes": "Print at 24x36 on matte paper."
+        }
+      ]
+    },
+    {
+      "title": "soul society",
+      "slug": "soul-society",
+      "collection": "anime",
+      "status": "active",
+      "storagePath": "ssarc (1).png",
+      "variants": [
+        {
+          "sku": "SOUL-SOCIETY-11X17-MATTE",
+          "label": "11x17 Matte",
+          "widthIn": 11,
+          "heightIn": 17,
+          "paperType": "matte",
+          "priceCents": 3500,
+          "currency": "usd",
+          "isActive": true,
+          "productionNotes": "Print at 11x17 on matte paper."
+        },
+        {
+          "sku": "SOUL-SOCIETY-18X24-MATTE",
+          "label": "18x24 Matte",
+          "widthIn": 18,
+          "heightIn": 24,
+          "paperType": "matte",
+          "priceCents": 5500,
+          "currency": "usd",
+          "isActive": true,
+          "productionNotes": "Print at 18x24 on matte paper."
+        },
+        {
+          "sku": "SOUL-SOCIETY-24X36-MATTE",
+          "label": "24x36 Matte",
+          "widthIn": 24,
+          "heightIn": 36,
+          "paperType": "matte",
+          "priceCents": 8000,
+          "currency": "usd",
+          "isActive": true,
+          "productionNotes": "Print at 24x36 on matte paper."
+        }
+      ]
+    },
+    {
+      "title": "hot - lesserafim",
+      "slug": "hot-lesserafim",
+      "collection": "kpop",
+      "status": "active",
+      "storagePath": "sserafim.png",
+      "variants": [
+        {
+          "sku": "HOT-LESSERAFIM-11X17-MATTE",
+          "label": "11x17 Matte",
+          "widthIn": 11,
+          "heightIn": 17,
+          "paperType": "matte",
+          "priceCents": 3500,
+          "currency": "usd",
+          "isActive": true,
+          "productionNotes": "Print at 11x17 on matte paper."
+        },
+        {
+          "sku": "HOT-LESSERAFIM-18X24-MATTE",
+          "label": "18x24 Matte",
+          "widthIn": 18,
+          "heightIn": 24,
+          "paperType": "matte",
+          "priceCents": 5500,
+          "currency": "usd",
+          "isActive": true,
+          "productionNotes": "Print at 18x24 on matte paper."
+        },
+        {
+          "sku": "HOT-LESSERAFIM-24X36-MATTE",
+          "label": "24x36 Matte",
+          "widthIn": 24,
+          "heightIn": 36,
+          "paperType": "matte",
+          "priceCents": 8000,
+          "currency": "usd",
+          "isActive": true,
+          "productionNotes": "Print at 24x36 on matte paper."
+        }
+      ]
+    },
+    {
+      "title": "rukia kuchiki",
+      "slug": "rukia-kuchiki",
+      "collection": "anime",
+      "status": "active",
+      "storagePath": "weaponanalysis.png",
+      "variants": [
+        {
+          "sku": "RUKIA-KUCHIKI-11X17-MATTE",
+          "label": "11x17 Matte",
+          "widthIn": 11,
+          "heightIn": 17,
+          "paperType": "matte",
+          "priceCents": 3500,
+          "currency": "usd",
+          "isActive": true,
+          "productionNotes": "Print at 11x17 on matte paper."
+        },
+        {
+          "sku": "RUKIA-KUCHIKI-18X24-MATTE",
+          "label": "18x24 Matte",
+          "widthIn": 18,
+          "heightIn": 24,
+          "paperType": "matte",
+          "priceCents": 5500,
+          "currency": "usd",
+          "isActive": true,
+          "productionNotes": "Print at 18x24 on matte paper."
+        },
+        {
+          "sku": "RUKIA-KUCHIKI-24X36-MATTE",
+          "label": "24x36 Matte",
+          "widthIn": 24,
+          "heightIn": 36,
+          "paperType": "matte",
+          "priceCents": 8000,
+          "currency": "usd",
+          "isActive": true,
+          "productionNotes": "Print at 24x36 on matte paper."
         }
       ]
     }

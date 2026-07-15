@@ -1,6 +1,11 @@
 import type { Metadata } from "next";
 import { Geist } from "next/font/google";
 import { ThemeProvider } from "next-themes";
+import { CartProvider } from "@/components/cart-provider";
+import { SiteNavShell } from "@/components/site-nav-shell";
+import { SiteFooter } from "@/components/site-footer";
+import { SiteOrnaments } from "@/components/site-ornaments";
+import { Suspense } from "react";
 import "./globals.css";
 
 const defaultUrl = process.env.VERCEL_URL
@@ -9,8 +14,8 @@ const defaultUrl = process.env.VERCEL_URL
 
 export const metadata: Metadata = {
   metadataBase: new URL(defaultUrl),
-  title: "Next.js and Supabase Starter Kit",
-  description: "The fastest way to build apps with Next.js and Supabase",
+  title: "mars",
+  description: "mars — posters, commissions, and visual work.",
 };
 
 const geistSans = Geist({
@@ -29,11 +34,20 @@ export default function RootLayout({
       <body className={`${geistSans.className} antialiased`}>
         <ThemeProvider
           attribute="class"
-          defaultTheme="system"
+          defaultTheme="light"
           enableSystem
           disableTransitionOnChange
         >
-          {children}
+          <CartProvider>
+            <div className="site-layout">
+              <Suspense fallback={null}>
+                <SiteNavShell />
+              </Suspense>
+              <SiteOrnaments />
+              {children}
+              <SiteFooter />
+            </div>
+          </CartProvider>
         </ThemeProvider>
       </body>
     </html>

@@ -1,19 +1,12 @@
 import { LoginForm } from "@/components/login-form";
+import { safeReturnTo } from "@/lib/auth-redirect";
 import { Suspense } from "react";
 
 type LoginPageProps = {
   searchParams: Promise<{
-    returnTo?: string;
+    returnTo?: string | string[];
   }>;
 };
-
-function safeReturnTo(returnTo?: string) {
-  if (!returnTo?.startsWith("/") || returnTo.startsWith("//")) {
-    return "/protected";
-  }
-
-  return returnTo;
-}
 
 async function LoginPageContent({ searchParams }: LoginPageProps) {
   const { returnTo } = await searchParams;

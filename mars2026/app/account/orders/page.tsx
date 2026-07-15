@@ -39,6 +39,7 @@ async function OrdersList() {
       `,
     )
     .eq("user_id", userId)
+    .eq("payment_status", "paid")
     .order("created_at", { ascending: false });
 
   if (error) {
@@ -50,7 +51,7 @@ async function OrdersList() {
   }
 
   if (!orders?.length) {
-    return <p className="mt-6">You do not have any orders yet.</p>;
+    return <p className="mt-6">You do not have any completed orders yet.</p>;
   }
 
   return (

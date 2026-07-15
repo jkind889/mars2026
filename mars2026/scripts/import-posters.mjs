@@ -112,6 +112,7 @@ async function upsertPoster(supabase, poster, imageUrl) {
         title: poster.title,
         slug: poster.slug,
         description: poster.description ?? null,
+        collection: poster.collection ?? null,
         image_url: imageUrl,
         status: poster.status ?? "draft",
       },

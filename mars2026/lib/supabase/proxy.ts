@@ -1,5 +1,6 @@
 import { createServerClient } from "@supabase/ssr";
 import { NextResponse, type NextRequest } from "next/server";
+import { returnToForRequest } from "@/lib/auth-redirect";
 import { hasEnvVars } from "../utils";
 
 export async function updateSession(request: NextRequest) {
@@ -10,6 +11,10 @@ export async function updateSession(request: NextRequest) {
   // If the env vars are not set, skip proxy check. You can remove this
   // once you setup the project.
   if (!hasEnvVars) {
+    return supabaseResponse;
+  }
+
+  if (request.nextUrl.pathname === "/api/stripe/webhook") {
     return supabaseResponse;
   }
 
@@ -46,7 +51,18 @@ export async function updateSession(request: NextRequest) {
   // with the Supabase client, your users may be randomly logged out.
   const { data } = await supabase.auth.getClaims();
   const user = data?.claims;
-  const publicPaths = ["/", "/auth", "/login", "/shop", "/posters"];
+  const publicPaths = [
+    "/",
+    "/auth",
+    "/login",
+    "/shop",
+    "/gallery",
+    "/archive",
+    "/about",
+    "/commissions",
+    "/contact",
+    "/posters",
+  ];
   const isPublicPath = publicPaths.some((path) =>
     path === "/"
       ? request.nextUrl.pathname === path
@@ -54,10 +70,17 @@ export async function updateSession(request: NextRequest) {
   );
 
   if (!user && !isPublicPath) {
-    // no user, potentially respond by redirecting the user to the login page
-    const url = request.nextUrl.clone();
-    url.pathname = "/auth/login";
-    return NextResponse.redirect(url);
+    const loginUrl = request.nextUrl.clone();
+    const returnTo = returnToForRequest(
+      request.nextUrl.pathname,
+      request.nextUrl.search,
+    );
+
+    loginUrl.pathname = "/auth/login";
+    loginUrl.search = "";
+    loginUrl.searchParams.set("returnTo", returnTo);
+
+    return NextResponse.redirect(loginUrl);
   }
 
   // IMPORTANT: You *must* return the supabaseResponse object as it is.

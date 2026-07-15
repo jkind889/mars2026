@@ -1,6 +1,8 @@
 "use client";
 
+import Link from "next/link";
 import { Button } from "@/components/ui/button";
+import { useCart } from "@/components/cart-provider";
 import { useState } from "react";
 
 type Variant = {
@@ -26,50 +28,20 @@ export function VariantPicker({
   const [selectedVariantId, setSelectedVariantId] = useState<number | null>(
     initialVariant ?? null,
   );
-  const [error, setError] = useState<string | null>(null);
-  const [isCheckingOut, setIsCheckingOut] = useState(false);
+  const [addedVariantId, setAddedVariantId] = useState<number | null>(null);
+  const { addItem } = useCart();
 
   const selectedVariant = variants.find(
     (variant) => variant.id === selectedVariantId,
   );
 
-  const handleCheckout = async () => {
+  const handleAddToCart = () => {
     if (!selectedVariantId) {
       return;
     }
 
-    setIsCheckingOut(true);
-    setError(null);
-
-    try {
-      const response = await fetch("/api/checkout", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({ variantId: selectedVariantId }),
-      });
-
-      const payload = (await response.json()) as {
-        error?: string;
-        loginUrl?: string;
-        url?: string;
-      };
-
-      if (response.status === 401 && payload.loginUrl) {
-        window.location.assign(payload.loginUrl);
-        return;
-      }
-
-      if (!response.ok || !payload.url) {
-        throw new Error(payload.error ?? "Checkout could not be started.");
-      }
-
-      window.location.assign(payload.url);
-    } catch (error) {
-      setError(error instanceof Error ? error.message : "Checkout failed.");
-      setIsCheckingOut(false);
-    }
+    addItem(selectedVariantId);
+    setAddedVariantId(selectedVariantId);
   };
 
   if (!variants.length) {
@@ -88,7 +60,10 @@ export function VariantPicker({
             <button
               key={variant.id}
               type="button"
-              onClick={() => setSelectedVariantId(variant.id)}
+              onClick={() => {
+                setSelectedVariantId(variant.id);
+                setAddedVariantId(null);
+              }}
               className={
                 isSelected
                   ? "rounded border border-foreground px-4 py-2"
@@ -110,13 +85,17 @@ export function VariantPicker({
       <Button
         type="button"
         className="mt-6"
-        disabled={!selectedVariant || isCheckingOut}
-        onClick={handleCheckout}
+        disabled={!selectedVariant}
+        onClick={handleAddToCart}
       >
-        {isCheckingOut ? "Redirecting..." : "Buy"}
+        {addedVariantId === selectedVariantId ? "Added to cart" : "Add to cart"}
       </Button>
 
-      {error ? <p className="mt-3 text-sm text-red-600">{error}</p> : null}
+      {addedVariantId === selectedVariantId ? (
+        <p className="mt-3 text-sm text-muted-foreground" role="status">
+          Added. <Link className="underline underline-offset-4" href="/cart">View cart</Link>
+        </p>
+      ) : null}
     </section>
   );
 }
