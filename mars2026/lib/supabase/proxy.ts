@@ -1,5 +1,6 @@
 import { createServerClient } from "@supabase/ssr";
 import { NextResponse, type NextRequest } from "next/server";
+import { returnToForRequest } from "@/lib/auth-redirect";
 import { hasEnvVars } from "../utils";
 
 export async function updateSession(request: NextRequest) {
@@ -69,10 +70,17 @@ export async function updateSession(request: NextRequest) {
   );
 
   if (!user && !isPublicPath) {
-    // no user, potentially respond by redirecting the user to the login page
-    const url = request.nextUrl.clone();
-    url.pathname = "/auth/login";
-    return NextResponse.redirect(url);
+    const loginUrl = request.nextUrl.clone();
+    const returnTo = returnToForRequest(
+      request.nextUrl.pathname,
+      request.nextUrl.search,
+    );
+
+    loginUrl.pathname = "/auth/login";
+    loginUrl.search = "";
+    loginUrl.searchParams.set("returnTo", returnTo);
+
+    return NextResponse.redirect(loginUrl);
   }
 
   // IMPORTANT: You *must* return the supabaseResponse object as it is.

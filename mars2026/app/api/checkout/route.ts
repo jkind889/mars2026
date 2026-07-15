@@ -46,6 +46,7 @@ type CheckoutOrderRow = {
   id: number;
   payment_status: string;
   stripe_checkout_session_id: string | null;
+  reused: boolean;
 };
 
 type CheckoutOrderItemRow = {
@@ -434,7 +435,7 @@ export async function POST(request: NextRequest) {
       );
     }
 
-    const currency = validatedItems[0].variant.currency;
+    const currency = validatedItems[0].variant.currency.toLowerCase();
     const subtotalCents = validatedItems.reduce(
       (total, item) => total + item.lineTotalCents,
       0,
@@ -457,54 +458,43 @@ export async function POST(request: NextRequest) {
     });
 
     const orderNumber = createOrderNumber(checkoutAttemptId);
-    const { data: insertedOrder, error: orderError } = await adminSupabase
-      .from("orders")
-      .insert({
-        user_id: user.id,
-        order_number: orderNumber,
-        stripe_customer_id: stripeCustomerId,
-        payment_status: "pending",
-        subtotal_cents: subtotalCents,
-        shipping_cents: 0,
-        tax_cents: 0,
-        total_cents: subtotalCents,
-        currency,
-        customer_email: user.email,
+    const { data: orderData, error: orderError } = await adminSupabase
+      .rpc("create_or_recover_checkout_order", {
+        p_user_id: user.id,
+        p_order_number: orderNumber,
+        p_stripe_customer_id: stripeCustomerId,
+        p_subtotal_cents: subtotalCents,
+        p_currency: currency,
+        p_customer_email: user.email ?? null,
+        p_items: validatedItems.map((item) => ({
+          poster_id: item.poster.id,
+          variant_id: item.variant.id,
+          quantity: item.quantity,
+          unit_price_cents: item.variant.price_cents,
+          line_total_cents: item.lineTotalCents,
+          poster_title_snapshot: item.poster.title,
+          variant_label_snapshot: item.variant.label,
+          poster_image_snapshot: item.poster.image_url,
+        })),
       })
-      .select("id")
-      .maybeSingle();
+      .single();
 
-    let order: CheckoutOrderRow;
-    let reusedOrder = false;
-
-    if (orderError?.code === "23505") {
-      const { data: existingOrder, error: existingOrderError } =
-        await adminSupabase
-          .from("orders")
-          .select("id, payment_status, stripe_checkout_session_id")
-          .eq("order_number", orderNumber)
-          .eq("user_id", user.id)
-          .maybeSingle();
-
-      if (existingOrderError || !existingOrder) {
-        throw new Error(
-          `Failed to recover checkout attempt: ${existingOrderError?.message ?? "No order returned"}`,
-        );
-      }
-
-      order = existingOrder as CheckoutOrderRow;
-      reusedOrder = true;
-    } else if (orderError || !insertedOrder) {
-      throw new Error(
-        `Failed to create pending order: ${orderError?.message ?? "No order returned"}`,
+    if (orderError?.code === "22023") {
+      throw new CheckoutPublicError(
+        "Your cart changed during checkout. Refresh it and try again.",
+        409,
+        true,
       );
-    } else {
-      order = {
-        id: insertedOrder.id,
-        payment_status: "pending",
-        stripe_checkout_session_id: null,
-      };
     }
+
+    if (orderError || !orderData) {
+      throw new Error(
+        `Failed to create or recover pending order: ${orderError?.message ?? "No order returned"}`,
+      );
+    }
+
+    const order = orderData as CheckoutOrderRow;
+    const reusedOrder = order.reused;
 
     const successUrl = `${checkoutOrigin(request)}/checkout/success?session_id={CHECKOUT_SESSION_ID}`;
 
@@ -562,27 +552,6 @@ export async function POST(request: NextRequest) {
           409,
           existingItemsByVariant.size > 0,
         );
-      }
-    } else {
-      const { error: itemError } = await adminSupabase
-        .from("order_items")
-        .insert(
-          validatedItems.map((item) => ({
-            order_id: order.id,
-            poster_id: item.poster.id,
-            variant_id: item.variant.id,
-            quantity: item.quantity,
-            unit_price_cents: item.variant.price_cents,
-            line_total_cents: item.lineTotalCents,
-            poster_title_snapshot: item.poster.title,
-            variant_label_snapshot: item.variant.label,
-            poster_image_snapshot: item.poster.image_url,
-          })),
-        );
-
-      if (itemError) {
-        await deletePendingOrder(order.id);
-        throw new Error(`Failed to create order items: ${itemError.message}`);
       }
     }
 
@@ -690,14 +659,22 @@ export async function POST(request: NextRequest) {
       );
     }
 
-    const { error: sessionUpdateError } = await adminSupabase
+    const { data: savedOrder, error: sessionUpdateError } = await adminSupabase
       .from("orders")
       .update({
         stripe_checkout_session_id: session.id,
       })
-      .eq("id", order.id);
+      .eq("id", order.id)
+      .eq("user_id", user.id)
+      .select("id, payment_status, stripe_checkout_session_id")
+      .maybeSingle();
 
-    if (sessionUpdateError) {
+    const sessionWasSaved =
+      savedOrder?.stripe_checkout_session_id === session.id &&
+      (savedOrder.payment_status === "pending" ||
+        savedOrder.payment_status === "paid");
+
+    if (sessionUpdateError || !sessionWasSaved) {
       await expireSessionAndDeleteOrder({
         orderId: order.id,
         sessionId: session.id,

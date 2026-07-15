@@ -66,6 +66,13 @@ test("Stripe errors distinguish missing resources from ambiguous results", () =>
   );
   assert.equal(
     isIndeterminateStripeError({
+      type: "StripeIdempotencyError",
+      statusCode: 400,
+    }),
+    true,
+  );
+  assert.equal(
+    isIndeterminateStripeError({
       type: "StripeInvalidRequestError",
       statusCode: 400,
     }),

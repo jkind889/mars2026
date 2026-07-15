@@ -12,13 +12,14 @@ import {
 } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
+import { DEFAULT_AUTH_RETURN_TO } from "@/lib/auth-redirect";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
 
 export function LoginForm({
   className,
-  returnTo = "/protected",
+  returnTo = DEFAULT_AUTH_RETURN_TO,
   ...props
 }: React.ComponentPropsWithoutRef<"div"> & { returnTo?: string }) {
   const [email, setEmail] = useState("");

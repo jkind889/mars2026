@@ -113,6 +113,7 @@ export function isIndeterminateStripeError(error: unknown) {
   return (
     stripeError.type === "StripeConnectionError" ||
     stripeError.type === "StripeAPIError" ||
+    stripeError.type === "StripeIdempotencyError" ||
     (typeof stripeError.statusCode === "number" &&
       stripeError.statusCode >= 500)
   );

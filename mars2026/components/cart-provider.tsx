@@ -9,6 +9,7 @@ import {
   useState,
   type ReactNode,
 } from "react";
+import { subtractPurchasedCartItems } from "@/lib/checkout-success";
 
 const STORAGE_KEY = "mars-cart-v1";
 const MAX_QUANTITY = 99;
@@ -25,6 +26,7 @@ type CartContextValue = {
   addItem: (variantId: number, quantity?: number) => void;
   updateQuantity: (variantId: number, quantity: number) => void;
   removeItem: (variantId: number) => void;
+  removePurchasedItems: (purchasedItems: CartItem[]) => void;
   clearCart: () => void;
 };
 
@@ -66,6 +68,17 @@ function normalizeItems(value: unknown): CartItem[] {
   }));
 }
 
+function cartItemsEqual(left: CartItem[], right: CartItem[]) {
+  return (
+    left.length === right.length &&
+    left.every(
+      (item, index) =>
+        item.variantId === right[index]?.variantId &&
+        item.quantity === right[index]?.quantity,
+    )
+  );
+}
+
 export function CartProvider({ children }: { children: ReactNode }) {
   const [items, setItems] = useState<CartItem[]>([]);
   const [isHydrated, setIsHydrated] = useState(false);
@@ -79,6 +92,31 @@ export function CartProvider({ children }: { children: ReactNode }) {
     } finally {
       setIsHydrated(true);
     }
+  }, []);
+
+  useEffect(() => {
+    const handleStorage = (event: StorageEvent) => {
+      if (event.key !== STORAGE_KEY) {
+        return;
+      }
+
+      let nextItems: CartItem[];
+
+      try {
+        nextItems = event.newValue
+          ? normalizeItems(JSON.parse(event.newValue))
+          : [];
+      } catch {
+        nextItems = [];
+      }
+
+      setItems((currentItems) =>
+        cartItemsEqual(currentItems, nextItems) ? currentItems : nextItems,
+      );
+    };
+
+    window.addEventListener("storage", handleStorage);
+    return () => window.removeEventListener("storage", handleStorage);
   }, []);
 
   useEffect(() => {
@@ -115,6 +153,12 @@ export function CartProvider({ children }: { children: ReactNode }) {
     );
   }, []);
 
+  const removePurchasedItems = useCallback((purchasedItems: CartItem[]) => {
+    setItems((currentItems) =>
+      subtractPurchasedCartItems(currentItems, purchasedItems),
+    );
+  }, []);
+
   const clearCart = useCallback(() => {
     setItems([]);
   }, []);
@@ -127,9 +171,18 @@ export function CartProvider({ children }: { children: ReactNode }) {
       addItem,
       updateQuantity,
       removeItem,
+      removePurchasedItems,
       clearCart,
     }),
-    [items, isHydrated, addItem, updateQuantity, removeItem, clearCart],
+    [
+      items,
+      isHydrated,
+      addItem,
+      updateQuantity,
+      removeItem,
+      removePurchasedItems,
+      clearCart,
+    ],
   );
 
   return <CartContext.Provider value={value}>{children}</CartContext.Provider>;
