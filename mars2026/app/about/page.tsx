@@ -1,3 +1,5 @@
+import Image from "next/image";
+
 const faqs = [
   {
     question: "What is MARS?",
@@ -22,18 +24,26 @@ const faqs = [
 ];
 
 const socials = [
-  { label: "Instagram", href: "https://instagram.com" },
+  { label: "Instagram", href: "https://www.instagram.com/goneoffmars/" },
   { label: "X / Twitter", href: "https://x.com" },
-  { label: "TikTok", href: "https://tiktok.com" },
+  { label: "TikTok", href: "https://www.tiktok.com/@goneoffmars" },
 ];
 
 export default function AboutPage() {
   return (
     <main className="about-page">
       <div className="about-layout">
-        <section className="about-visual" aria-label="Portrait placeholder">
-          <div className="about-placeholder" role="img" aria-label="Blank circular image placeholder" />
-          <span className="about-cross" aria-hidden="true" />
+        <section className="about-visual" aria-label="Portrait">
+          <div className="about-placeholder">
+            <Image
+              alt="Portrait of the artist behind MARS"
+              className="about-portrait"
+              fill
+              priority
+              sizes="(max-width: 767px) min(64vw, 300px), min(34vw, 470px)"
+              src="/about-portrait.png"
+            />
+          </div>
         </section>
 
         <div className="about-content">
@@ -43,14 +53,10 @@ export default function AboutPage() {
             </p>
             <div className="about-copy">
               <p>
-                I&apos;m the person behind MARS, an independent poster studio for
-                designs, references, and visual ideas I want to live with.
+               make poster listen music
               </p>
               <p>
-                The shop is a growing collection of printed work — from music
-                and image-making to the visual details that stay with me. I care
-                about clear composition, thoughtful objects, and making things
-                that feel good to keep around.
+                I am a CS major, I dabble in Graphic Design and drawing sometimes, here is everything I&apos;ve made
               </p>
             </div>
           </section>
@@ -83,7 +89,7 @@ export default function AboutPage() {
                   <span aria-hidden="true">↗</span>
                 </a>
               ))}
-              <a href="mailto:hello@mars2026.com">
+              <a href="mailto:jkind889@gmail.com">
                 <span>Email</span>
                 <span aria-hidden="true">↗</span>
               </a>

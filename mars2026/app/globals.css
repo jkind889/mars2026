@@ -488,7 +488,13 @@
     background: var(--site-surface);
     border: 1px solid var(--site-border-soft);
     border-radius: 50%;
+    overflow: hidden;
+    position: relative;
     width: min(34vw, 470px);
+  }
+
+  .about-portrait {
+    object-fit: cover;
   }
 
   .about-cross,
