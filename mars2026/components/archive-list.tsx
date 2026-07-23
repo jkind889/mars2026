@@ -139,7 +139,7 @@ export default function ArchiveList({ posters }: { posters: ArchivePoster[] }) {
         <div className="archive-preview-caption">
           <span>{activePoster?.title ?? "No matching poster"}</span>
           {activePoster ? (
-            <Link href={`/posters/${activePoster.slug}`}>View poster ↗</Link>
+            <Link href={`/posters/${activePoster.slug}`}>View poster</Link>
           ) : null}
         </div>
       </aside>

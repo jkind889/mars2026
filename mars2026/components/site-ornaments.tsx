@@ -35,6 +35,36 @@ const ornaments = [
     above: aboveCoral,
     below: belowCoral,
   },
+  {
+    className: "site-ornament-coral site-ornament-coral-top-left-secondary",
+    above: aboveCoral,
+    below: belowCoral,
+  },
+  {
+    className: "site-ornament-fish site-ornament-fish-mid-left",
+    above: aboveFish,
+    below: belowFish,
+  },
+  {
+    className: "site-ornament-coral site-ornament-coral-mid-right",
+    above: aboveCoral,
+    below: belowCoral,
+  },
+  {
+    className: "site-ornament-fish site-ornament-fish-bottom-right",
+    above: aboveFish,
+    below: belowFish,
+  },
+  {
+    className: "site-ornament-fish site-ornament-fish-top-center",
+    above: aboveFish,
+    below: belowFish,
+  },
+  {
+    className: "site-ornament-coral site-ornament-coral-bottom-center",
+    above: aboveCoral,
+    below: belowCoral,
+  },
 ];
 
 export function SiteOrnaments() {

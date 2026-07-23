@@ -2,9 +2,9 @@ import Image from "next/image";
 
 const faqs = [
   {
-    question: "What is MARS?",
+    question: "What is mars?",
     answer:
-      "MARS is an independent poster studio for designs, references, and visual ideas that I want to live with.",
+      "I like to create things a lot so I think this will be the place to showcase and sell some of those things ",
   },
   {
     question: "Where are the posters printed?",
@@ -19,7 +19,7 @@ const faqs = [
   {
     question: "Can I ask about a custom piece?",
     answer:
-      "Yes. Send a note with the idea, reference, or project you have in mind and I will get back to you.",
+      "Yes. Send a DM on Instagram or email me with the idea, reference, or project you have in mind and I will get back to you.",
   },
 ];
 
@@ -86,12 +86,10 @@ export default function AboutPage() {
               {socials.map((social) => (
                 <a href={social.href} key={social.label} target="_blank" rel="noreferrer">
                   <span>{social.label}</span>
-                  <span aria-hidden="true">↗</span>
                 </a>
               ))}
-              <a href="mailto:jkind889@gmail.com">
+              <a href="kindofaneww@gmail.com">
                 <span>Email</span>
-                <span aria-hidden="true">↗</span>
               </a>
             </div>
           </section>

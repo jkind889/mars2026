@@ -40,7 +40,7 @@ export default function CommissionsPage() {
               terms listed here
             </p>
             <Link className="commission-contact-link" href="/contact">
-              Start a commission <span aria-hidden="true">↗</span>
+              Start a commission
             </Link>
           </header>
 

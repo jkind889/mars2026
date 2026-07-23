@@ -2,7 +2,7 @@
 
 import { FormEvent, useState } from "react";
 
-const contactEmail = "hello@mars2026.com";
+const contactEmail = "kindofaneww@gmail.com";
 
 export function ContactForm() {
   const [isSent, setIsSent] = useState(false);
@@ -47,7 +47,7 @@ export function ContactForm() {
       </div>
 
       <button className="commission-submit" type="submit">
-        Open email draft <span aria-hidden="true">↗</span>
+        Open email draft
       </button>
 
       <p className="commission-form-note" aria-live="polite">

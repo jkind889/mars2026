@@ -40,6 +40,7 @@
     --site-strong: #000;
     --site-inverse: #fff;
     --site-hover-strong: #292929;
+    --site-button-hover: #744e96;
     --site-placeholder: #b8b8b4;
     --site-border: rgba(23, 23, 23, 0.14);
     --site-border-soft: rgba(23, 23, 23, 0.12);
@@ -166,7 +167,7 @@
   .site-ornament-fish-top-left {
     aspect-ratio: 615 / 877;
     left: -8vw;
-    opacity: 0.62;
+    opacity: 0.42;
     top: -12vh;
     transform: rotate(-12deg);
     width: min(14vw, 210px);
@@ -174,7 +175,7 @@
 
   .site-ornament-coral-top-right {
     aspect-ratio: 195 / 263;
-    opacity: 0.72;
+    opacity: 0.48;
     right: 12vw;
     top: -15vh;
     transform: rotate(193deg);
@@ -183,7 +184,7 @@
 
   .site-ornament-fish-right {
     aspect-ratio: 615 / 877;
-    opacity: 0.22;
+    opacity: 0.17;
     right: -15vw;
     top: 38%;
     transform: rotate(84deg);
@@ -200,7 +201,7 @@
     aspect-ratio: 195 / 263;
     bottom: -22vh;
     left: -4vw;
-    opacity: 0.55;
+    opacity: 0.34;
     transform: rotate(-18deg);
     width: min(13vw, 195px);
   }
@@ -209,28 +210,82 @@
     aspect-ratio: 195 / 263;
     bottom: -18vh;
     display: none;
-    opacity: 0.55;
+    opacity: 0.32;
     right: -3vw;
     transform: rotate(17deg);
     width: min(12vw, 180px);
   }
 
+  .site-ornament-coral-top-left-secondary {
+    aspect-ratio: 195 / 263;
+    left: 20vw;
+    opacity: 0.16;
+    top: -18vh;
+    transform: rotate(138deg);
+    width: min(8vw, 120px);
+  }
+
+  .site-ornament-fish-mid-left {
+    aspect-ratio: 615 / 877;
+    left: -17vw;
+    opacity: 0.14;
+    top: 42%;
+    transform: rotate(58deg);
+    width: min(12vw, 175px);
+  }
+
+  .site-ornament-coral-mid-right {
+    aspect-ratio: 195 / 263;
+    opacity: 0.16;
+    right: -10vw;
+    top: 46%;
+    transform: rotate(-42deg);
+    width: min(10vw, 150px);
+  }
+
+  .site-ornament-fish-bottom-right {
+    aspect-ratio: 615 / 877;
+    bottom: -20vh;
+    opacity: 0.18;
+    right: 8vw;
+    transform: rotate(-60deg);
+    width: min(14vw, 210px);
+  }
+
+  .site-ornament-fish-top-center {
+    aspect-ratio: 615 / 877;
+    opacity: 0.12;
+    right: 34vw;
+    top: -14vh;
+    transform: rotate(24deg);
+    width: min(8vw, 120px);
+  }
+
+  .site-ornament-coral-bottom-center {
+    aspect-ratio: 195 / 263;
+    bottom: -24vh;
+    left: 43vw;
+    opacity: 0.13;
+    transform: rotate(-25deg);
+    width: min(9vw, 135px);
+  }
+
   .site-nav-home ~ .site-ornaments .site-ornament-fish-top-left {
     left: -8.7vw;
-    opacity: 1;
+    opacity: 0.48;
     top: -9.2vh;
     width: min(18vw, 270px);
   }
 
   .site-nav-home ~ .site-ornaments .site-ornament-coral-top-right {
-    opacity: 1;
+    opacity: 0.46;
     right: 13.9vw;
     top: -14.2vh;
     width: min(10.95vw, 164px);
   }
 
   .site-nav-home ~ .site-ornaments .site-ornament-fish-right {
-    opacity: 1;
+    opacity: 0.18;
     right: 5.65vw;
     top: 27.3%;
     width: min(18.7vw, 280px);
@@ -240,21 +295,21 @@
     bottom: -0.2vh;
     display: block;
     left: 6.75vw;
-    opacity: 1;
+    opacity: 0.3;
     width: min(19vw, 280px);
   }
 
   .site-nav-home ~ .site-ornaments .site-ornament-coral-bottom-left {
     bottom: -31.8vh;
     left: -5vw;
-    opacity: 1;
+    opacity: 0.34;
     width: min(18.4vw, 276px);
   }
 
   .site-nav-home ~ .site-ornaments .site-ornament-coral-bottom-right {
     bottom: -14.3vh;
     display: block;
-    opacity: 1;
+    opacity: 0.3;
     right: -1vw;
     width: min(14vw, 210px);
   }
@@ -368,9 +423,9 @@
 
   .site-auth-links a:last-child:hover,
   .site-auth-links a:last-child:focus-visible {
-    background: var(--site-foreground);
-    border-color: var(--site-foreground);
-    color: var(--site-background);
+    background: var(--site-button-hover);
+    border-color: var(--site-button-hover);
+    color: #fff;
   }
 
   .site-user-email {
@@ -398,7 +453,7 @@
   .site-nav .site-nav-logout:hover,
   .site-nav .site-nav-logout:focus-visible {
     background: transparent;
-    color: var(--site-foreground);
+    color: var(--site-button-hover);
   }
 
   .site-theme-switcher-button {
@@ -410,7 +465,7 @@
 
   .site-theme-switcher-button:hover,
   .site-theme-switcher-button:focus-visible {
-    color: var(--site-foreground);
+    color: var(--site-button-hover);
   }
 
   .site-footer {
@@ -658,7 +713,7 @@
 
   .commission-page-nav a:hover,
   .commission-page-nav a:focus-visible {
-    background: var(--site-hover-strong);
+    background: var(--site-button-hover);
     transform: translateY(-2px);
   }
 
@@ -720,7 +775,7 @@
 
   .commission-contact-link:hover,
   .commission-contact-link:focus-visible {
-    background: var(--site-hover-strong);
+    background: var(--site-button-hover);
     transform: translateY(-2px);
   }
 
@@ -849,7 +904,7 @@
   }
 
   .commission-submit:hover {
-    background: var(--site-hover-strong);
+    background: var(--site-button-hover);
     transform: translateY(-2px);
   }
 
@@ -1087,7 +1142,7 @@
   .archive-preview-image,
   .archive-preview-mobile {
     align-items: center;
-    background: var(--site-surface-alt);
+    background: transparent;
     display: flex;
     justify-content: center;
     overflow: hidden;
@@ -1172,21 +1227,45 @@
 
   @media (max-width: 800px) {
     .site-nav {
-      flex-wrap: wrap;
-      padding: 22px 20px;
+      align-items: center;
+      column-gap: 16px;
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) auto;
+      padding: 18px 16px 16px;
+      row-gap: 18px;
     }
 
     .site-links {
-      gap: 13px;
+      align-items: center;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px 16px;
+      grid-column: 1 / -1;
       margin-left: 0;
-      order: 3;
-      justify-content: center;
+      order: 0;
+      justify-content: flex-start;
       width: 100%;
     }
 
     .site-nav-actions {
-      gap: 12px;
-      margin-left: auto;
+      gap: 10px;
+      grid-column: 2;
+      grid-row: 1;
+      min-width: 0;
+    }
+
+    .site-nav-actions > a,
+    .site-auth-links a,
+    .site-nav .site-nav-logout {
+      font-size: 10px;
+    }
+
+    .site-user-email {
+      display: none;
+    }
+
+    .site-user {
+      gap: 8px;
     }
 
     .site-user-email {
@@ -1251,39 +1330,78 @@
     }
 
     .site-nav-home ~ .site-ornaments .site-ornament-fish-top-left {
+      opacity: 0.36;
       left: -18vw;
       top: -2vh;
       width: 48vw;
     }
 
     .site-nav-home ~ .site-ornaments .site-ornament-coral-top-right {
+      opacity: 0.34;
       right: 0;
       top: -6vh;
       width: 30vw;
     }
 
     .site-nav-home ~ .site-ornaments .site-ornament-fish-right {
+      opacity: 0.16;
       right: -23vw;
       top: 58%;
       width: 57vw;
     }
 
     .site-nav-home ~ .site-ornaments .site-ornament-fish-bottom-left {
+      opacity: 0.3;
       bottom: -9vh;
       left: -10vw;
       width: 52vw;
     }
 
     .site-nav-home ~ .site-ornaments .site-ornament-coral-bottom-left {
+      opacity: 0.3;
       bottom: -6vh;
       left: -8vw;
       width: 31vw;
     }
 
     .site-nav-home ~ .site-ornaments .site-ornament-coral-bottom-right {
+      opacity: 0.28;
       bottom: -7vh;
       right: -8vw;
       width: 34vw;
+    }
+
+    .site-ornament-coral-top-left-secondary {
+      left: 16vw;
+      opacity: 0.12;
+      top: -10vh;
+      width: 27vw;
+    }
+
+    .site-ornament-fish-mid-left {
+      left: -25vw;
+      opacity: 0.11;
+      top: 43%;
+      width: 34vw;
+    }
+
+    .site-ornament-coral-mid-right {
+      opacity: 0.12;
+      right: -21vw;
+      top: 48%;
+      width: 29vw;
+    }
+
+    .site-ornament-fish-bottom-right {
+      bottom: -9vh;
+      opacity: 0.13;
+      right: -12vw;
+      width: 36vw;
+    }
+
+    .site-ornament-fish-top-center,
+    .site-ornament-coral-bottom-center {
+      display: none;
     }
 
     .home-links {
