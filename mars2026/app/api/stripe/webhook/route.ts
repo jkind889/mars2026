@@ -14,6 +14,18 @@ type WebhookOrderRow = {
   currency: string | null;
 };
 
+type LegacyShippingDetails = {
+  name?: string | null;
+  address?: {
+    line1?: string | null;
+    line2?: string | null;
+    city?: string | null;
+    state?: string | null;
+    postal_code?: string | null;
+    country?: string | null;
+  } | null;
+};
+
 function getOrderId(session: Stripe.Checkout.Session) {
   const orderId = Number(session.metadata?.order_id);
 
@@ -87,7 +99,12 @@ async function loadAndValidateOrder(session: Stripe.Checkout.Session) {
 }
 
 function sessionOrderFields(session: Stripe.Checkout.Session) {
-  const shippingDetails = session.collected_information?.shipping_details;
+  // Current Stripe API versions place this under collected_information. The
+  // raw fallback keeps older webhook payloads compatible.
+  const shippingDetails =
+    session.collected_information?.shipping_details ??
+    (session as unknown as { shipping_details?: LegacyShippingDetails | null })
+      .shipping_details;
   const address = shippingDetails?.address;
 
   return {
@@ -110,6 +127,18 @@ function sessionOrderFields(session: Stripe.Checkout.Session) {
   };
 }
 
+function hasShippingDetails(fields: ReturnType<typeof sessionOrderFields>) {
+  return Boolean(
+    fields.shipping_name ||
+      fields.shipping_address_line1 ||
+      fields.shipping_address_line2 ||
+      fields.shipping_city ||
+      fields.shipping_state ||
+      fields.shipping_postal_code ||
+      fields.shipping_country,
+  );
+}
+
 async function handleSuccessfulCheckout(
   session: Stripe.Checkout.Session,
   isAsyncSuccess: boolean,
@@ -121,11 +150,38 @@ async function handleSuccessfulCheckout(
     return;
   }
 
-  const order = await loadAndValidateOrder(session);
+  // Retrieve the completed Session so the webhook uses the current Stripe
+  // response shape even when the event was created with an older API version.
+  const stripe = createStripeClient();
+  const completedSession = await stripe.checkout.sessions.retrieve(session.id);
+  const order = await loadAndValidateOrder(completedSession);
   const orderId = order.id;
   const supabase = createAdminClient();
+  const orderFields = sessionOrderFields(completedSession);
 
   if (order.payment_status !== "pending") {
+    if (hasShippingDetails(orderFields)) {
+      const { error } = await supabase
+        .from("orders")
+        .update({
+          stripe_checkout_session_id: orderFields.stripe_checkout_session_id,
+          shipping_name: orderFields.shipping_name,
+          shipping_address_line1: orderFields.shipping_address_line1,
+          shipping_address_line2: orderFields.shipping_address_line2,
+          shipping_city: orderFields.shipping_city,
+          shipping_state: orderFields.shipping_state,
+          shipping_postal_code: orderFields.shipping_postal_code,
+          shipping_country: orderFields.shipping_country,
+        })
+        .eq("id", orderId);
+
+      if (error) {
+        throw new Error(
+          `Failed to backfill shipping for order ${orderId}: ${error.message}`,
+        );
+      }
+    }
+
     console.info(
       `Order ${orderId} is already ${order.payment_status}; skipping duplicate payment update.`,
     );
@@ -135,7 +191,7 @@ async function handleSuccessfulCheckout(
   const { data: updatedOrder, error } = await supabase
     .from("orders")
     .update({
-      ...sessionOrderFields(session),
+      ...orderFields,
       payment_status: "paid",
       fulfillment_status: "unfulfilled",
       paid_at: new Date().toISOString(),
