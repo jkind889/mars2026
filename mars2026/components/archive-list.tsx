@@ -29,6 +29,7 @@ function posterFocus(collection: string | null) {
 export default function ArchiveList({ posters }: { posters: ArchivePoster[] }) {
   const [activeId, setActiveId] = useState(posters[0]?.id ?? null);
   const [query, setQuery] = useState("");
+  const [layout, setLayout] = useState<"list" | "grid">("list");
   const normalizedQuery = query.trim().toLocaleLowerCase();
   const filteredPosters = normalizedQuery
     ? posters.filter((poster) =>
@@ -51,26 +52,46 @@ export default function ArchiveList({ posters }: { posters: ArchivePoster[] }) {
   return (
     <section className="archive-workspace" aria-label="Poster archive list">
       <div className="archive-catalog">
-        <div
-          className="archive-search"
-          role="search"
-          aria-label="Search poster archive"
-        >
+        <div className="archive-toolbar">
+          <div
+            className="archive-search"
+            role="search"
+            aria-label="Search poster archive"
+          >
           <div className="archive-search-meta">
             <label htmlFor="archive-search">Search archive</label>
             <span role="status" aria-live="polite">
               {resultCount} posters
             </span>
           </div>
-          <Input
-            id="archive-search"
-            type="search"
-            value={query}
-            onChange={(event) => setQuery(event.target.value)}
-            placeholder="Title, collection, or year"
-            autoComplete="off"
-            aria-controls="archive-results"
-          />
+            <Input
+              id="archive-search"
+              type="search"
+              value={query}
+              onChange={(event) => setQuery(event.target.value)}
+              placeholder="Title, collection, or year"
+              autoComplete="off"
+              aria-controls="archive-results"
+            />
+          </div>
+          <div className="archive-layout-toggle" aria-label="Archive layout">
+            <button
+              type="button"
+              className={layout === "list" ? "is-active" : ""}
+              aria-pressed={layout === "list"}
+              onClick={() => setLayout("list")}
+            >
+              List
+            </button>
+            <button
+              type="button"
+              className={layout === "grid" ? "is-active" : ""}
+              aria-pressed={layout === "grid"}
+              onClick={() => setLayout("grid")}
+            >
+              Grid
+            </button>
+          </div>
         </div>
 
         <div className="archive-preview-mobile" aria-hidden="true">
@@ -83,6 +104,7 @@ export default function ArchiveList({ posters }: { posters: ArchivePoster[] }) {
           )}
         </div>
 
+        <div className={`archive-results-wrap is-${layout}`}>
         <div className="archive-table-wrap">
           <div className="archive-table-head" aria-hidden="true">
             <span>No.</span>
@@ -119,6 +141,23 @@ export default function ArchiveList({ posters }: { posters: ArchivePoster[] }) {
               </p>
             )}
           </div>
+        </div>
+        {layout === "grid" ? (
+          <div className="archive-grid" id="archive-results">
+            {filteredPosters.length ? filteredPosters.map((poster) => (
+              <Link className="archive-card" href={`/posters/${poster.slug}`} key={poster.id}>
+                <div className="archive-card-image">
+                  {poster.image_url ? <img src={poster.image_url} alt="" /> : <span>MARS</span>}
+                </div>
+                <div className="archive-card-meta">
+                  <span>{poster.title}</span>
+                  <span>{posterYear(poster.created_at)}</span>
+                </div>
+                <span className="archive-card-focus">{posterFocus(poster.collection)}</span>
+              </Link>
+            )) : <p className="archive-search-empty">No posters match &ldquo;{query.trim()}&rdquo;.</p>}
+          </div>
+        ) : null}
         </div>
       </div>
 
