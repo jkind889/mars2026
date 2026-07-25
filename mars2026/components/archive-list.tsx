@@ -26,6 +26,23 @@ function posterFocus(collection: string | null) {
   return collection?.trim() || "Poster · Print";
 }
 
+function previewImageUrl(imageUrl: string | null) {
+  if (!imageUrl) return null;
+
+  // Supabase Storage can resize public images at the render endpoint. Keep
+  // archive previews lightweight so saving a preview does not expose the
+  // original full-resolution upload.
+  if (imageUrl.includes("/storage/v1/object/public/")) {
+    const renderedUrl = imageUrl.replace(
+      "/storage/v1/object/public/",
+      "/storage/v1/render/image/public/",
+    );
+    return `${renderedUrl}${renderedUrl.includes("?") ? "&" : "?"}width=900&quality=45&resize=contain`;
+  }
+
+  return imageUrl;
+}
+
 export default function ArchiveList({ posters }: { posters: ArchivePoster[] }) {
   const [activeId, setActiveId] = useState(posters[0]?.id ?? null);
   const [query, setQuery] = useState("");
@@ -45,6 +62,7 @@ export default function ArchiveList({ posters }: { posters: ArchivePoster[] }) {
   const activePoster =
     filteredPosters.find((poster) => poster.id === activeId) ??
     filteredPosters[0];
+  const activePreviewUrl = previewImageUrl(activePoster?.image_url ?? null);
   const resultCount = `${filteredPosters.length
     .toString()
     .padStart(2, "0")} of ${posters.length.toString().padStart(2, "0")}`;
@@ -95,8 +113,8 @@ export default function ArchiveList({ posters }: { posters: ArchivePoster[] }) {
         </div>
 
         <div className="archive-preview-mobile" aria-hidden="true">
-          {activePoster?.image_url ? (
-            <img src={activePoster.image_url} alt="" />
+          {activePreviewUrl ? (
+            <img src={activePreviewUrl} alt="" />
           ) : (
             <div className="archive-preview-fallback">
               {normalizedQuery ? "No match" : "MARS"}
@@ -147,7 +165,9 @@ export default function ArchiveList({ posters }: { posters: ArchivePoster[] }) {
             {filteredPosters.length ? filteredPosters.map((poster) => (
               <Link className="archive-card" href={`/posters/${poster.slug}`} key={poster.id}>
                 <div className="archive-card-image">
-                  {poster.image_url ? <img src={poster.image_url} alt="" /> : <span>MARS</span>}
+                  {previewImageUrl(poster.image_url) ? (
+                    <img src={previewImageUrl(poster.image_url) ?? undefined} alt="" />
+                  ) : <span>MARS</span>}
                 </div>
                 <div className="archive-card-meta">
                   <span>{poster.title}</span>
@@ -163,10 +183,10 @@ export default function ArchiveList({ posters }: { posters: ArchivePoster[] }) {
 
       <aside className="archive-preview" aria-live="polite">
         <div className="archive-preview-image">
-          {activePoster?.image_url ? (
+          {activePreviewUrl ? (
             <img
               key={activePoster.id}
-              src={activePoster.image_url}
+              src={activePreviewUrl}
               alt={activePoster.title}
             />
           ) : (

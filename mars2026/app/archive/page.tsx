@@ -27,8 +27,7 @@ async function ArchivePageContent() {
         <p className="archive-kicker">Poster archive · Available prints</p>
         <h1 id="archive-title">A collection of printed work.</h1>
         <p>
-          Browse every available poster, from the first release to what&apos;s
-          moving through the studio now.
+          Browse every available poster for sale as well as any other poster I&apos;ve made.
         </p>
       </section>
 
