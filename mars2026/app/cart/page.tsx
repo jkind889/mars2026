@@ -8,6 +8,7 @@ import { createClient } from "@/lib/supabase/client";
 
 type PosterRelation = {
   title: string;
+  slug: string;
   image_url: string | null;
   status: string;
 };
@@ -85,6 +86,7 @@ export default function CartPage() {
           currency,
           posters!inner (
             title,
+            slug,
             image_url,
             status
           )
@@ -295,7 +297,14 @@ export default function CartPage() {
                 </div>
 
                 <div>
-                  <h2 className="font-medium">{poster.title}</h2>
+                  <h2 className="font-medium">
+                    <Link
+                      className="underline underline-offset-4"
+                      href={`/posters/${poster.slug}`}
+                    >
+                      {poster.title}
+                    </Link>
+                  </h2>
                   <p className="mt-1 text-sm text-muted-foreground">
                     {item.variant.label ?? "Poster"}
                   </p>
