@@ -136,6 +136,79 @@
     margin-left: 5%;
   }
 
+  .home-ocean {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    font-family: ui-monospace, Menlo, monospace;
+    opacity: 0.5;
+    /* Keep the wordmark and links quiet as fish pass behind them. */
+    mask-image: radial-gradient(ellipse 320px 150px at 50% 48%, transparent 40%, #000 100%);
+  }
+
+  .dark .home-ocean {
+    opacity: 0.65;
+  }
+
+  .site-layout:has(.home-ocean[data-ready="true"]) .site-nav-home ~ .site-ornaments .site-ornament-fish {
+    display: none;
+  }
+
+  .home-ocean-controls {
+    position: absolute;
+    bottom: 18px;
+    inset-inline: 16px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    gap: 4px 20px;
+    color: var(--site-muted-strong);
+    font-family: ui-monospace, Menlo, monospace;
+    font-size: 10px;
+    z-index: 2;
+  }
+
+  .home-ocean-controls button,
+  .home-ocean-controls a {
+    display: inline-flex;
+    align-items: center;
+    min-height: 44px;
+    padding: 0 8px;
+  }
+
+  .home-ocean-controls :is(button, a):hover {
+    color: var(--site-foreground);
+  }
+
+  .home-ocean-controls :is(button, a):focus-visible {
+    outline: 2px solid var(--site-foreground);
+    outline-offset: 3px;
+    border-radius: 2px;
+  }
+
+  .home-ocean-still {
+    display: none;
+  }
+
+  @media (max-height: 480px) {
+    .home-page:has(.home-ocean) {
+      min-height: 360px;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .home-ocean-toggle {
+      display: none !important;
+    }
+
+    .home-ocean-still {
+      display: inline;
+    }
+  }
+
   .site-ornaments {
     height: 100svh;
     inset: 0 0 auto;

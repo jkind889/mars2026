@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { HomeOcean } from "@/components/home-ocean";
 
 const homeLinks = [
   { href: "/archive", label: "Archive" },
@@ -10,6 +11,7 @@ const homeLinks = [
 export default function Home() {
   return (
     <main className="home-page">
+      <HomeOcean />
       <div className="home-content">
         <h1>mars</h1>
         <nav className="home-links" aria-label="Site pages">
