@@ -88,7 +88,7 @@ export default function AboutPage() {
                   <span>{social.label}</span>
                 </a>
               ))}
-              <a href="kindofaneww@gmail.com">
+              <a href="mailto:marscorp@yuriful.net">
                 <span>Email</span>
               </a>
             </div>

@@ -2,7 +2,7 @@
 
 import { FormEvent, useState } from "react";
 
-const contactEmail = "kindofaneww@gmail.com";
+const contactEmail = "marscorp@yuriful.net";
 
 export function ContactForm() {
   const [isSent, setIsSent] = useState(false);
