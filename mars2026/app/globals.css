@@ -4,92 +4,100 @@
 
 @layer base {
   :root {
-    --background: 0 0% 100%;
-    --foreground: 0 0% 3.9%;
-    --card: 0 0% 100%;
-    --card-foreground: 0 0% 3.9%;
-    --popover: 0 0% 100%;
-    --popover-foreground: 0 0% 3.9%;
-    --primary: 0 0% 9%;
-    --primary-foreground: 0 0% 98%;
-    --secondary: 0 0% 96.1%;
-    --secondary-foreground: 0 0% 9%;
-    --muted: 0 0% 96.1%;
-    --muted-foreground: 0 0% 45.1%;
-    --accent: 0 0% 96.1%;
-    --accent-foreground: 0 0% 9%;
-    --destructive: 0 84.2% 60.2%;
-    --destructive-foreground: 0 0% 98%;
-    --border: 0 0% 89.8%;
-    --input: 0 0% 89.8%;
-    --ring: 0 0% 3.9%;
+    --background: 240 100% 16.078431%;
+    --foreground: 240 100% 98%;
+    --card: 240 77% 22%;
+    --card-foreground: 240 100% 98%;
+    --popover: 240 77% 22%;
+    --popover-foreground: 240 100% 98%;
+    --primary: 240 100% 98%;
+    --primary-foreground: 240 100% 16%;
+    --secondary: 240 50% 27%;
+    --secondary-foreground: 240 100% 98%;
+    --muted: 240 45% 25%;
+    --muted-foreground: 240 30% 79%;
+    --accent: 240 40% 32%;
+    --accent-foreground: 240 100% 98%;
+    --destructive: 350 100% 85%;
+    --destructive-foreground: 240 100% 16%;
+    --border: 240 32% 45%;
+    --input: 240 30% 65%;
+    --ring: 240 60% 85%;
     --chart-1: 12 76% 61%;
     --chart-2: 173 58% 39%;
-    --chart-3: 197 37% 24%;
+    --chart-3: 197 37% 64%;
     --chart-4: 43 74% 66%;
     --chart-5: 27 87% 67%;
     --radius: 0.5rem;
-    --site-background: #fbfbfa;
-    --site-foreground: #171717;
-    --site-muted: #858585;
-    --site-muted-strong: #555;
-    --site-muted-soft: #777;
-    --site-quiet: #4d4d4d;
-    --site-surface: #ebebe8;
-    --site-surface-alt: #e9e9e6;
-    --site-strong: #000;
-    --site-inverse: #fff;
-    --site-hover-strong: #292929;
+    --site-background: #000052;
+    --site-foreground: #f5f5ff;
+    --site-muted: #b8b8d9;
+    --site-muted-strong: #d0d0eb;
+    --site-muted-soft: #a9a9ce;
+    --site-quiet: #c1c1df;
+    --site-surface: #0d0d64;
+    --site-surface-alt: #18186f;
+    --site-strong: #f5f5ff;
+    --site-inverse: #000052;
+    --site-hover-strong: #dcdcf4;
     --site-button-hover: #744e96;
-    --site-placeholder: #b8b8b4;
-    --site-border: rgba(23, 23, 23, 0.14);
-    --site-border-soft: rgba(23, 23, 23, 0.12);
-    --site-border-strong: rgba(23, 23, 23, 0.5);
-    --site-border-input: rgba(23, 23, 23, 0.3);
-    --site-overlay: rgba(23, 23, 23, 0.22);
+    --site-placeholder: #a9a9ce;
+    --site-border: rgba(245, 245, 255, 0.25);
+    --site-border-soft: rgba(245, 245, 255, 0.18);
+    --site-border-strong: rgba(245, 245, 255, 0.55);
+    --site-border-input: rgba(245, 245, 255, 0.55);
+    --site-overlay: rgba(0, 0, 40, 0.42);
+    --site-warning: #f5d69e;
+    color-scheme: dark;
   }
   .dark {
-    --background: 0 0% 3.9%;
-    --foreground: 0 0% 98%;
-    --card: 0 0% 3.9%;
-    --card-foreground: 0 0% 98%;
-    --popover: 0 0% 3.9%;
-    --popover-foreground: 0 0% 98%;
-    --primary: 0 0% 98%;
-    --primary-foreground: 0 0% 9%;
-    --secondary: 0 0% 14.9%;
-    --secondary-foreground: 0 0% 98%;
-    --muted: 0 0% 14.9%;
-    --muted-foreground: 0 0% 63.9%;
-    --accent: 0 0% 14.9%;
-    --accent-foreground: 0 0% 98%;
-    --destructive: 0 62.8% 30.6%;
-    --destructive-foreground: 0 0% 98%;
-    --border: 0 0% 14.9%;
-    --input: 0 0% 14.9%;
-    --ring: 0 0% 83.1%;
-    --chart-1: 220 70% 50%;
-    --chart-2: 160 60% 45%;
-    --chart-3: 30 80% 55%;
-    --chart-4: 280 65% 60%;
-    --chart-5: 340 75% 55%;
-    --site-background: #151514;
-    --site-foreground: #f5f5f3;
-    --site-muted: #a3a39d;
-    --site-muted-strong: #bdbdb6;
-    --site-muted-soft: #a7a7a1;
-    --site-quiet: #b4b4ad;
-    --site-surface: #242422;
-    --site-surface-alt: #292927;
-    --site-strong: #f5f5f3;
-    --site-inverse: #151514;
-    --site-hover-strong: #deded8;
-    --site-placeholder: #777772;
-    --site-border: rgba(245, 245, 243, 0.18);
-    --site-border-soft: rgba(245, 245, 243, 0.13);
-    --site-border-strong: rgba(245, 245, 243, 0.5);
-    --site-border-input: rgba(245, 245, 243, 0.32);
-    --site-overlay: rgba(0, 0, 0, 0.42);
+    --background: 229 41% 10.6%;
+    --foreground: 226 21% 88%;
+    --card: 228 35% 14.5%;
+    --card-foreground: 226 21% 88%;
+    --popover: 228 35% 14.5%;
+    --popover-foreground: 226 21% 88%;
+    --primary: 226 21% 88%;
+    --primary-foreground: 229 41% 10.6%;
+    --secondary: 228 25% 22%;
+    --secondary-foreground: 226 21% 88%;
+    --muted: 228 25% 20%;
+    --muted-foreground: 224 18% 70%;
+    --accent: 228 22% 27%;
+    --accent-foreground: 226 21% 88%;
+    --destructive: 350 55% 78%;
+    --destructive-foreground: 229 41% 10.6%;
+    --border: 225 19% 35%;
+    --input: 224 18% 55%;
+    --ring: 224 22% 75%;
+    --chart-1: 220 50% 60%;
+    --chart-2: 160 35% 55%;
+    --chart-3: 30 50% 65%;
+    --chart-4: 280 35% 65%;
+    --chart-5: 340 40% 65%;
+    --site-background: #101426;
+    --site-foreground: #dadde7;
+    --site-muted: #a5adc2;
+    --site-muted-strong: #c1c7d7;
+    --site-muted-soft: #9ba5bb;
+    --site-quiet: #b4bdd0;
+    --site-surface: #181d32;
+    --site-surface-alt: #20263d;
+    --site-strong: #d2d7e3;
+    --site-inverse: #101426;
+    --site-hover-strong: #bfc7da;
+    --site-placeholder: #9ba5bb;
+    --site-border: rgba(218, 221, 231, 0.24);
+    --site-border-soft: rgba(218, 221, 231, 0.16);
+    --site-border-strong: rgba(218, 221, 231, 0.5);
+    --site-border-input: rgba(218, 221, 231, 0.5);
+    --site-overlay: rgba(6, 9, 20, 0.48);
+    --site-warning: #d7c39e;
+  }
+
+  body {
+    background: var(--site-background);
+    color: var(--site-foreground);
   }
 }
 
@@ -101,9 +109,34 @@
     position: relative;
   }
 
-  .site-layout > :not(.site-nav):not(.site-ornaments) {
+  .site-layout > :not(.site-nav):not(.site-ornaments):not(.site-ocean):not(.ocean-skip-link) {
     position: relative;
     z-index: 1;
+  }
+
+  .ocean-skip-link {
+    position: absolute;
+    top: 8px;
+    left: 8px;
+    z-index: 30;
+    transform: translateY(-200%);
+    background: var(--site-surface);
+    color: var(--site-foreground);
+    padding: 12px;
+  }
+
+  .ocean-skip-link:focus {
+    transform: none;
+    outline: 2px solid var(--site-foreground);
+  }
+
+  /* Keep existing status utilities legible on both navy palettes. */
+  .site-layout :is(.text-red-500, .text-red-600, .text-red-700) {
+    color: hsl(var(--destructive));
+  }
+
+  .site-layout .text-amber-700 {
+    color: var(--site-warning);
   }
 
   .site-nav {
@@ -126,7 +159,7 @@
     background: transparent;
     display: flex;
     justify-content: center;
-    min-height: calc(100svh - 68px);
+    min-height: calc(100svh - 132px);
     overflow: visible;
     padding: 40px;
     position: relative;
@@ -136,75 +169,96 @@
     margin-left: 5%;
   }
 
-  .home-ocean {
-    position: absolute;
+  .site-ocean {
+    position: fixed;
     inset: 0;
     width: 100%;
-    height: 100%;
+    height: 100svh;
     pointer-events: none;
     font-family: ui-monospace, Menlo, monospace;
-    opacity: 0.5;
-    /* Keep the wordmark and links quiet as fish pass behind them. */
+    opacity: 0.32;
+    z-index: 0;
+    clip-path: inset(88px 0 0);
+    /* The edges carry the movement; text and forms stay quiet in the center. */
+    mask-image: linear-gradient(to right, #000, #0005 20%, #0005 80%, #000);
+  }
+
+  .site-layout:has(> .site-nav-home) .site-ocean {
+    opacity: 0.78;
     mask-image: radial-gradient(ellipse 320px 150px at 50% 48%, transparent 40%, #000 100%);
   }
 
-  .dark .home-ocean {
-    opacity: 0.65;
+  .dark .site-ocean {
+    filter: saturate(0.42) brightness(0.85);
+    opacity: 0.22;
   }
 
-  .site-layout:has(.home-ocean[data-ready="true"]) .site-nav-home ~ .site-ornaments .site-ornament-fish {
+  .dark .site-layout:has(> .site-nav-home) .site-ocean {
+    opacity: 0.48;
+  }
+
+  .dark .site-ornaments {
+    opacity: 0.6;
+    filter: saturate(0.5);
+  }
+
+  .site-layout:has(.site-ocean[data-ready="true"]) .site-ornament-fish {
     display: none;
   }
 
-  .home-ocean-controls {
-    position: absolute;
-    bottom: 18px;
-    inset-inline: 16px;
+  .site-ocean-controls {
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
     align-items: center;
     gap: 4px 20px;
+    min-height: 64px;
+    padding: 10px 16px;
     color: var(--site-muted-strong);
     font-family: ui-monospace, Menlo, monospace;
     font-size: 10px;
-    z-index: 2;
   }
 
-  .home-ocean-controls button,
-  .home-ocean-controls a {
+  .site-ocean-controls button,
+  .site-ocean-controls a {
     display: inline-flex;
     align-items: center;
     min-height: 44px;
     padding: 0 8px;
   }
 
-  .home-ocean-controls :is(button, a):hover {
+  .site-ocean-controls :is(button, a):hover {
     color: var(--site-foreground);
   }
 
-  .home-ocean-controls :is(button, a):focus-visible {
+  .site-ocean-controls :is(button, a):focus-visible {
     outline: 2px solid var(--site-foreground);
     outline-offset: 3px;
     border-radius: 2px;
   }
 
-  .home-ocean-still {
+  .site-ocean-still {
     display: none;
   }
 
+  @media (max-width: 800px) {
+    .site-ocean {
+      clip-path: inset(132px 0 0);
+    }
+  }
+
   @media (max-height: 480px) {
-    .home-page:has(.home-ocean) {
-      min-height: 360px;
+    .home-page {
+      min-height: 300px;
     }
   }
 
   @media (prefers-reduced-motion: reduce) {
-    .home-ocean-toggle {
+    .site-ocean-toggle {
       display: none !important;
     }
 
-    .home-ocean-still {
+    .site-ocean-still {
       display: inline;
     }
   }
@@ -497,7 +551,7 @@
   .site-auth-links a:last-child:hover,
   .site-auth-links a:last-child:focus-visible {
     background: var(--site-button-hover);
-    border-color: var(--site-button-hover);
+    border-color: var(--site-foreground);
     color: #fff;
   }
 
@@ -526,7 +580,7 @@
   .site-nav .site-nav-logout:hover,
   .site-nav .site-nav-logout:focus-visible {
     background: transparent;
-    color: var(--site-button-hover);
+    color: var(--site-foreground);
   }
 
   .site-theme-switcher-button {
@@ -538,7 +592,7 @@
 
   .site-theme-switcher-button:hover,
   .site-theme-switcher-button:focus-visible {
-    color: var(--site-button-hover);
+    color: var(--site-foreground);
   }
 
   .site-footer {
@@ -787,6 +841,7 @@
   .commission-page-nav a:hover,
   .commission-page-nav a:focus-visible {
     background: var(--site-button-hover);
+    color: #fff;
     transform: translateY(-2px);
   }
 
@@ -849,6 +904,7 @@
   .commission-contact-link:hover,
   .commission-contact-link:focus-visible {
     background: var(--site-button-hover);
+    color: #fff;
     transform: translateY(-2px);
   }
 
@@ -978,6 +1034,7 @@
 
   .commission-submit:hover {
     background: var(--site-button-hover);
+    color: #fff;
     transform: translateY(-2px);
   }
 
@@ -1468,7 +1525,7 @@
     }
 
     .home-page {
-      min-height: calc(100svh - 112px);
+      min-height: calc(100svh - 176px);
       padding: 32px 20px 48px;
     }
 

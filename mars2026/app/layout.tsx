@@ -4,6 +4,7 @@ import { ThemeProvider } from "next-themes";
 import { CartProvider } from "@/components/cart-provider";
 import { SiteNavShell } from "@/components/site-nav-shell";
 import { SiteFooter } from "@/components/site-footer";
+import { SiteOcean } from "@/components/site-ocean";
 import { SiteOrnaments } from "@/components/site-ornaments";
 import { Suspense } from "react";
 import "./globals.css";
@@ -36,15 +37,18 @@ export default function RootLayout({
           attribute="class"
           defaultTheme="light"
           enableSystem
+          enableColorScheme={false}
           disableTransitionOnChange
         >
           <CartProvider>
             <div className="site-layout">
+              <a className="ocean-skip-link" href="#ocean-controls">Skip to animation controls</a>
               <Suspense fallback={null}>
                 <SiteNavShell />
               </Suspense>
               <SiteOrnaments />
               {children}
+              <SiteOcean />
               <SiteFooter />
             </div>
           </CartProvider>

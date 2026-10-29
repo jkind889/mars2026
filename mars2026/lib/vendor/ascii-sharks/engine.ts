@@ -20,9 +20,10 @@ export class OceanEngine {
   private intersectionObserver: IntersectionObserver;
   private disposed = false;
   private paused = false;
+  private compact: boolean | null = null;
 
-  constructor(private canvas: HTMLCanvasElement, sharks?: SharkSpec[]) {
-    this.world = new World(sharks, 72);
+  constructor(private canvas: HTMLCanvasElement, private sharks?: SharkSpec[]) {
+    this.world = new World(sharks, 200);
     this.renderer = new AsciiRenderer(canvas);
     this.renderer.setFontFamily(getComputedStyle(canvas).fontFamily);
     this.reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
@@ -78,6 +79,13 @@ export class OceanEngine {
   private resize() {
     const rect = this.canvas.getBoundingClientRect();
     if (rect.width < 1 || rect.height < 1) return;
+    const compact = rect.width < 640;
+    if (compact !== this.compact) {
+      // Bound the work on phones; re-seed only when crossing the density breakpoint.
+      this.compact = compact;
+      this.world = new World(compact ? this.sharks?.slice(0, 3) : this.sharks, compact ? 120 : 200);
+      this.acc = 0;
+    }
     const dpr = Math.min(window.devicePixelRatio || 1, 2);
     this.renderer.resize(rect.width, rect.height, dpr);
     this.world.resize(rect.width, rect.height, this.renderer.cellWidth, this.renderer.cellHeight);
